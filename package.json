@@ -1,0 +1,11 @@
+{
+  "name": "studentshowcaseportfolio",
+  "version": "0.1.0",
+  "description": "Student Showcase Portfolio Application for Major Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
