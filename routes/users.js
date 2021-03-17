@@ -65,7 +65,7 @@ router.post('/authenticate', (req, res, next) =>{
 });
 
 //Profile
-router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+router.get('/:username', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     res.json({user: req.user});
 });
 
@@ -73,7 +73,7 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 
 
 //Projects Gallery
-router.get('/project_gallery', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+router.get('/:username/project_gallery', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     res.json({user: req.user});
 });
 
