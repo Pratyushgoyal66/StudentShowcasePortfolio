@@ -66,7 +66,7 @@ const UserSchema = mongoose.Schema({
         linkedIn: {
             type: String,
             trim: true,
-            validate: [/((http(s?):\/\/)*([www])*\.|[linkedin])[linkedin/~\-]+\.[a-zA-Z0-9/~\-_,&=\?\.;]+[^\.,\s<]/i, 'Please fill a valid Linkedin Profile link']
+            validate: [/((https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/)((([\w]{2,3})?)|([^\/]+\/(([\w|\d-&#?=])+\/?){1,}))$/i, 'Please fill a valid Linkedin Profile link']
 
         },
     },

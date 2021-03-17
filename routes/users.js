@@ -15,8 +15,8 @@ router.post('/register', (req, res, next) => {
         role: req.body.role,
         department: req.body.department,
         enrollmentNo: req.body.enrollmentNo,
-        phoneNo: req.body.phoneNo
-        //social: req.body.social
+        phoneNo: req.body.phoneNo,
+        social: req.body.social
 
     });
 
@@ -69,5 +69,14 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     res.json({user: req.user});
 });
 
+//Projects
+
+
+//Projects Gallery
+router.get('/project_gallery', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    res.json({user: req.user});
+});
+
+//Add Project
 
 module.exports = router;
