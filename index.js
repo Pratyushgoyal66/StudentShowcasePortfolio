@@ -22,9 +22,6 @@ const app = express();
 
 const users = require('./routes/users');
 
-//HTTP Logger
-// app.use(morgan('dev'));
-
 //Set-up Cross-Origin Resource Sharing
 app.use(cors());
 app.options('*', cors());
