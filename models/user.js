@@ -28,10 +28,8 @@ const UserSchema = mongoose.Schema({
         required: true
     },
     role: {
-        type: [{
-            type: String,
-            enum: ['student', 'teacher', 'university']
-        }],
+        type: String,
+        enum: ['student', 'teacher', 'university'],
         default: ['student']
     },
     department: {
@@ -43,28 +41,32 @@ const UserSchema = mongoose.Schema({
     enrollmentNo: {
         type: Number,
         trim: true,
-        unique: true,
-        match:[/^\d{10}$/, 'Please fill in a valid Roll No'],
+        unique: function (){
+            return this.roles === "student"
+        },
+        validate: [/^\d{11}$/, 'Please fill in a valid Roll No'],
         required: function (){
             return this.roles === "student"
-        }
+        },
+        default: null
+
     },
     phoneNo: [{
         type: Number,
         trim: true,
-        match: [/^\d{10}$/, 'Please fill a valid telephone number']
+        validate: [/^\d{10}$/, 'Please fill a valid telephone number']
     
     }],
     social: {
         github:{
             type: String,
             trim: true,
-            match: [/^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$/i,'Please fill a valid github profile link']
+            validate: [/^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$/i,'Please fill a valid github profile link']
         },
         linkedIn: {
             type: String,
             trim: true,
-            match: [/((http(s?):\/\/)*([www])*\.|[linkedin])[linkedin/~\-]+\.[a-zA-Z0-9/~\-_,&=\?\.;]+[^\.,\s<]/i, 'Please fill a valid Linkedin Profile link']
+            validate: [/((http(s?):\/\/)*([www])*\.|[linkedin])[linkedin/~\-]+\.[a-zA-Z0-9/~\-_,&=\?\.;]+[^\.,\s<]/i, 'Please fill a valid Linkedin Profile link']
 
         },
     },
@@ -94,4 +96,11 @@ module.exports.addUser = function(newUser, callback){
         });
     });
 
+}
+
+module.exports.comparePassword = function(candidatePassword, hash, callback){
+    bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
+        if(err) throw err;
+        callback(null, isMatch);
+    });
 }

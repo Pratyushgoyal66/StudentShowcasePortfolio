@@ -33,6 +33,13 @@ app.options('*', cors());
 app.use(express.json()); //Parse json bodies
 app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
 
+//Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
+
+
 app.use('/users', users);
 
 //Port Number
