@@ -30,7 +30,6 @@ const UserSchema = mongoose.Schema({
     role: {
         type: String,
         enum: ['student', 'teacher', 'university'],
-        default: ['student']
     },
     department: {
         type: String,
@@ -54,6 +53,7 @@ const UserSchema = mongoose.Schema({
     phoneNo: [{
         type: Number,
         trim: true,
+        unique: true,
         validate: [/^\d{10}$/, 'Please fill a valid telephone number']
     
     }],
@@ -61,16 +61,25 @@ const UserSchema = mongoose.Schema({
         github:{
             type: String,
             trim: true,
+            sparse: true,
             validate: [/^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$/i,'Please fill a valid github profile link']
         },
         linkedIn: {
             type: String,
             trim: true,
+            sparse: true,
             validate: [/((https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/)((([\w]{2,3})?)|([^\/]+\/(([\w|\d-&#?=])+\/?){1,}))$/i, 'Please fill a valid Linkedin Profile link']
 
         },
     },
-    projects: [{type: mongoose.Schema.Types.ObjectId, ref: 'Project'}]
+    projects: [{
+        _id: {
+            type: mongoose.Schema.Types.ObjectId, ref: 'Project'
+        },
+        title:{
+            type:String
+        }
+    }]
 })
 
 const User = mongoose.model('User', UserSchema);
