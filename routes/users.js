@@ -84,38 +84,42 @@ router.get('/:username/project_gallery', passport.authenticate('jwt', {session:f
 
 //Add Project
 router.post('/:username/addProject',  passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    if (req.user.username != req.params.username){
+        res.send("Invalid user")
+    }
+    else {
+        const username = req.params.username;
 
-    const username = req.params.username;
+        User.getUserByUsername(username, (err, user) =>{
+            if (err) throw err;
+            if (!user) {return res.json({success:false, msg: "User not found"})}
+            else{
+                let newProject = new Project({
+                    _author: user._id,
+                    title: req.body.title,
+                    body: req.body.body,
+                    demoUrl: req.body.demoUrl,
+                    repo: req.body.repo
+                });
+                newProject.save((err, proj) => { 
+                    if (err){
+                        res.send(400, 'Bad Request')
+                    }
+                    else{
+                        user.projects.push({
+                            _id: newProject._id,
+                            title: newProject.title
+                        });
+                        user.save();
+                        res.json({success: true});
+                    }
+                });
 
-    User.getUserByUsername(username, (err, user) =>{
-        if (err) throw err;
-        if (!user) {return res.json({success:false, msg: "User not found"})}
-        else{
-            let newProject = new Project({
-                _author: user._id,
-                title: req.body.title,
-                body: req.body.body,
-                demoUrl: req.body.demoUrl,
-                repo: req.body.repo
-            });
-            newProject.save((err, proj) => { 
-                if (err){
-                    res.send(400, 'Bad Request')
-                }
-                else{
-                    user.projects.push({
-                        _id: newProject._id,
-                        title: newProject.title
-                    });
-                    user.save();
-                    res.json({success: true});
-                }
-            });
+                
+            }
 
-            
-        }
-
-    });
+        });
+    }
 });
 
 module.exports = router;
