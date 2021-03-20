@@ -1,0 +1,37 @@
+.submitForm {
+    background-color: #5D5C61;
+    border-color: #B0A295;
+    box-shadow: 1px 1px #B0A295;
+    margin:0 auto;
+    display:block;
+}
+
+.submitForm:hover {
+    background-color: #B0A295;
+    border-color: #5D5C61;
+    box-shadow: 1px 1px #5D5C61;
+}   
+
+h1, h3 {
+    font-family: 'Quicksand';
+    font-weight: 800;
+}
+
+.jumbotron {
+    border-radius: 1em;
+    background-color: #B0A295;
+    color: white;
+}
+
+input {
+    background-color: #FAEFE5;
+}
+
+.linkedIn {
+   float: right;
+}
+
+.containerNew {
+    margin-left: 50px;
+    margin-right: 50px;
+}
