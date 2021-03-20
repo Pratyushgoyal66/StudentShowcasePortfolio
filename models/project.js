@@ -6,8 +6,12 @@ const User = require('./user');
 //Projects Schema
 const ProjectSchema = mongoose.Schema({
     _author: {
-        type:String
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },
+    author: {
+        type: String
+    },
+
     title: {
         type: String,
         unique: true,

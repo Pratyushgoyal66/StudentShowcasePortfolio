@@ -37,18 +37,20 @@ export class AddProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getProfile().subscribe(profile => {
-      this.projForm.controls.author['controls'].value = profile.user.username;
+      this.projForm.controls['author'].setValue(profile.user.username);
     },
     err => {
       console.log(err);
       return false;
     });
+
   }
 
   onAddSubmit() {
     const rawProj = this.projForm.getRawValue();
     let project = {
-      _author: String,
+      author: String,
+      title: String,
       body : {
         shortDescription: String,
         description: String,
@@ -60,10 +62,24 @@ export class AddProjectComponent implements OnInit {
       repo: String,
       demoUrl: String
     };
-    project._author = rawProj.author;
+    project.author = rawProj.author;
+    project.title = rawProj.title;
     project.body = rawProj.body;
     project.repo = rawProj.repo;
     project.demoUrl = rawProj.demoUrl;
+
+
+    //addProject
+    this.authService.addProject(project).subscribe(data => {
+      if(data.success){
+        
+        this.flashMessage.show('Your Project Added Successfully!!', {cssClass: 'alert-success', timeout:3000});
+        this.router.navigate([project.author]);
+      } else{
+        this.flashMessage.show('Something went wrong!', {cssClass: 'alert-danger', timeout:3000});
+        this.router.navigate([project.author]);
+      }
+    });
   }
 
 }
