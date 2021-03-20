@@ -15,8 +15,12 @@ import { AuthGuardLoggedOut } from './guards/authLoggedOut.guard';
 import { ValidateService } from './services/validate.service';
 import {AuthGuardLoggedIn } from './guards/authLoggedIn.guard';
 import { AuthService } from './services/auth.service';
+<<<<<<< HEAD
 import { ProjectComponent } from './components/project/project.component';
 import { ProjectGalleryComponent } from './components/project-gallery/project-gallery.component'; 
+=======
+import { AddProjectComponent } from './components/add-project/add-project.component'; 
+>>>>>>> 5521912 (Add-Project Form)
 const appRoutes: Routes = [
   {path : '', component: HomeComponent},
   {path : 'register', component: RegisterComponent, canActivate: [AuthGuardLoggedIn]},
@@ -35,8 +39,12 @@ const appRoutes: Routes = [
     RegisterComponent,
     ProfileComponent,
     HomeComponent,
+<<<<<<< HEAD
     ProjectComponent,
     ProjectGalleryComponent
+=======
+    AddProjectComponent
+>>>>>>> 5521912 (Add-Project Form)
   ],
   imports: [
     BrowserModule,
