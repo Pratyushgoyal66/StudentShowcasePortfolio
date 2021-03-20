@@ -17,6 +17,8 @@ export class AuthService {
 
   authToken: any;
   user: any;
+  project: any;
+  projurl: any;
 
 
   constructor(
@@ -32,6 +34,19 @@ export class AuthService {
     ).pipe(map(res => res));
 
   }
+
+  addProject(project){
+    this.loadToken();
+    console.log(project);
+    this.projurl = 'http://localhost:5000/users';
+    let headers = new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json'});
+    return this.http.post<any>(
+      `${this.projurl}/${project.author}/addProject`,
+      project,
+      {headers: headers}
+    ).pipe(map(res => res));
+  }
+
 
   authenticateUser(user){
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
@@ -65,6 +80,25 @@ export class AuthService {
       {headers: headers}
     ).pipe(map(res => res));
 
+  }
+
+  getProject(username: String, title: String){
+    this.projurl = 'http://localhost:5000/users';
+    let headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get<any>(
+      `${this.projurl}/${username}/project/${title}`,
+      {headers: headers}
+    ).pipe(map(res => res));
+  }
+
+  
+  getProjectGallery(username: String){
+    this.projurl = 'http://localhost:5000/users';
+    let headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get<any>(
+      `${this.projurl}/${username}/projectGallery`,
+      {headers: headers}
+    ).pipe(map(res => res));
   }
 
   loadToken(){

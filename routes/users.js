@@ -33,6 +33,17 @@ router.post('/register', (req, res, next) => {
     })
 });
 
+//Projects
+router.get('/:username/project/:title', (req, res, next) => {
+    Project.getProjectByTitle(req.params.title, (err, project) =>{
+        if (err) throw err;
+        if (!project) {return res.json({success:false, msg: "Project not found"})}
+        else{
+            res.json({project: project});
+        }
+    });
+});
+
 //Authenticate
 router.post('/authenticate', (req, res, next) =>{
     const username = req.body.username;
@@ -72,30 +83,53 @@ router.get('/:username', passport.authenticate('jwt', {session:false}), (req, re
     res.json({user: req.user});
 });
 
-//Projects
-router.get('/:title', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    res.json({project: req.project});
-});
+
 
 //Projects Gallery
-router.get('/:username/project_gallery', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    res.json({user: req.user});
+router.get('/:username/projectGallery', (req, res, next) => {
+    User.getUserByUsername(req.params.username, (err, user) => {
+        var Projects = [];
+        if (err) throw err;
+        if (!user) {return res.json({success:false, msg: "User not found"})}
+        else if(user.role.type !== 'student'){
+            res.send("Bad Request, No Project Gallery support for teachers currently")
+        }
+        else{
+            if (user.projects.length === 0){
+                res.send("The user has not submitted any projects");
+            }
+            else{
+                Promise.all(user.projects.map(proj =>{
+                    return Project.findById({_id: proj._id}).exec();
+                })).then(foundProjects => {
+                    res.send(foundProjects);
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
+
+        }
+    } );
 });
 
 //Add Project
 router.post('/:username/addProject',  passport.authenticate('jwt', {session:false}), (req, res, next) => {
     if (req.user.username != req.params.username){
-        res.send("Invalid user")
+        res.send("Invalid user");
     }
     else {
         const username = req.params.username;
-
         User.getUserByUsername(username, (err, user) =>{
             if (err) throw err;
-            if (!user) {return res.json({success:false, msg: "User not found"})}
+            if (!user) {
+                return res.json({success:false, msg: "User not found"})};
+            if(user.role.type !== 'student'){
+                res.json({success: false, msg: 'Failed to add Project'});
+            }
             else{
                 let newProject = new Project({
                     _author: user._id,
+                    author: user.name,
                     title: req.body.title,
                     body: req.body.body,
                     demoUrl: req.body.demoUrl,
@@ -103,7 +137,7 @@ router.post('/:username/addProject',  passport.authenticate('jwt', {session:fals
                 });
                 newProject.save((err, proj) => { 
                     if (err){
-                        res.send(400, 'Bad Request')
+                        res.json({success: false, msg: 'Failed to save project',err:err});
                     }
                     else{
                         user.projects.push({
@@ -111,7 +145,7 @@ router.post('/:username/addProject',  passport.authenticate('jwt', {session:fals
                             title: newProject.title
                         });
                         user.save();
-                        res.json({success: true});
+                        res.json({success: true, msg: 'Project Added Successfully'});
                     }
                 });
 

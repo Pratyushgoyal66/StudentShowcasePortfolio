@@ -14,12 +14,20 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuardLoggedOut } from './guards/authLoggedOut.guard';
 import { ValidateService } from './services/validate.service';
 import {AuthGuardLoggedIn } from './guards/authLoggedIn.guard';
-import { AuthService } from './services/auth.service'; 
+import { AuthService } from './services/auth.service';
+import { ProjectComponent } from './components/project/project.component';
+import { ProjectGalleryComponent } from './components/project-gallery/project-gallery.component'; 
+import { AddProjectComponent } from './components/add-project/add-project.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 const appRoutes: Routes = [
   {path : '', component: HomeComponent},
   {path : 'register', component: RegisterComponent, canActivate: [AuthGuardLoggedIn]},
   {path : 'login', component: LoginComponent, canActivate: [AuthGuardLoggedIn]},
-  {path : ':username', component: ProfileComponent, canActivate: [AuthGuardLoggedOut]}
+  {path : ':username', component: ProfileComponent, canActivate: [AuthGuardLoggedOut]},
+  {path : ':username/project/:title', component: ProjectComponent},
+  {path : ':username/addProject', component: AddProjectComponent, canActivate: [AuthGuardLoggedOut]},
+  {path : ':username/projectGallery', component: ProjectGalleryComponent},
 
 ];
 
@@ -31,7 +39,12 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    ProjectComponent,
+    ProjectGalleryComponent,
+    AddProjectComponent,
+    AddProjectComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -40,7 +53,9 @@ const appRoutes: Routes = [
     ReactiveFormsModule, 
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [ValidateService, AuthService, AuthGuardLoggedOut, AuthGuardLoggedIn],
   bootstrap: [AppComponent]
