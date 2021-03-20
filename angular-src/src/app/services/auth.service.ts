@@ -17,6 +17,8 @@ export class AuthService {
 
   authToken: any;
   user: any;
+  project: any;
+  projurl: any;
 
 
   constructor(
@@ -65,6 +67,15 @@ export class AuthService {
       {headers: headers}
     ).pipe(map(res => res));
 
+  }
+
+  getProject(username: String, title: String){
+    this.projurl = 'http://localhost:5000/users';
+    let headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get<any>(
+      `${this.projurl}/${username}/project/${title}`,
+      {headers: headers}
+    ).pipe(map(res => res));
   }
 
   loadToken(){

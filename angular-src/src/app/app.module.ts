@@ -15,12 +15,18 @@ import { AuthGuardLoggedOut } from './guards/authLoggedOut.guard';
 import { ValidateService } from './services/validate.service';
 import {AuthGuardLoggedIn } from './guards/authLoggedIn.guard';
 import { AuthService } from './services/auth.service';
+<<<<<<< HEAD
 import { AddProjectComponent } from './components/add-project/add-project.component'; 
+=======
+import { ProjectComponent } from './components/project/project.component';
+import { ProjectGalleryComponent } from './components/project-gallery/project-gallery.component'; 
+>>>>>>> 566a3281a94c1281b88a539a74503afc76131f18
 const appRoutes: Routes = [
   {path : '', component: HomeComponent},
   {path : 'register', component: RegisterComponent, canActivate: [AuthGuardLoggedIn]},
   {path : 'login', component: LoginComponent, canActivate: [AuthGuardLoggedIn]},
-  {path : ':username', component: ProfileComponent, canActivate: [AuthGuardLoggedOut]}
+  {path : ':username', component: ProfileComponent, canActivate: [AuthGuardLoggedOut]},
+  {path : ':username/project/:title', component: ProjectComponent}
 
 ];
 
@@ -33,7 +39,12 @@ const appRoutes: Routes = [
     RegisterComponent,
     ProfileComponent,
     HomeComponent,
+<<<<<<< HEAD
     AddProjectComponent
+=======
+    ProjectComponent,
+    ProjectGalleryComponent
+>>>>>>> 566a3281a94c1281b88a539a74503afc76131f18
   ],
   imports: [
     BrowserModule,
