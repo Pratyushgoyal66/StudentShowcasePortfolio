@@ -14,12 +14,15 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuardLoggedOut } from './guards/authLoggedOut.guard';
 import { ValidateService } from './services/validate.service';
 import {AuthGuardLoggedIn } from './guards/authLoggedIn.guard';
-import { AuthService } from './services/auth.service'; 
+import { AuthService } from './services/auth.service';
+import { ProjectComponent } from './components/project/project.component';
+import { ProjectGalleryComponent } from './components/project-gallery/project-gallery.component'; 
 const appRoutes: Routes = [
   {path : '', component: HomeComponent},
   {path : 'register', component: RegisterComponent, canActivate: [AuthGuardLoggedIn]},
   {path : 'login', component: LoginComponent, canActivate: [AuthGuardLoggedIn]},
-  {path : ':username', component: ProfileComponent, canActivate: [AuthGuardLoggedOut]}
+  {path : ':username', component: ProfileComponent, canActivate: [AuthGuardLoggedOut]},
+  {path : ':username/project/:title', component: ProjectComponent}
 
 ];
 
@@ -31,7 +34,9 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    ProjectComponent,
+    ProjectGalleryComponent
   ],
   imports: [
     BrowserModule,

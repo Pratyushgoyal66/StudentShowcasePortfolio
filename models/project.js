@@ -75,7 +75,7 @@ module.exports.getProjectById = function(id, callback){
     Project.findById(id, callback);
 }
 
-module.exports.getProjectByTitle = function(username, callback){
+module.exports.getProjectByTitle = function(title, callback){
     const query = {title: title};
     Project.findOne(query, callback);
 }
