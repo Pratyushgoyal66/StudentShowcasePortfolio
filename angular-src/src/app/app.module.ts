@@ -14,7 +14,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuardLoggedOut } from './guards/authLoggedOut.guard';
 import { ValidateService } from './services/validate.service';
 import {AuthGuardLoggedIn } from './guards/authLoggedIn.guard';
-import { AuthService } from './services/auth.service'; 
+import { AuthService } from './services/auth.service';
+import { AddProjectComponent } from './components/add-project/add-project.component'; 
 const appRoutes: Routes = [
   {path : '', component: HomeComponent},
   {path : 'register', component: RegisterComponent, canActivate: [AuthGuardLoggedIn]},
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    HomeComponent
+    HomeComponent,
+    AddProjectComponent
   ],
   imports: [
     BrowserModule,

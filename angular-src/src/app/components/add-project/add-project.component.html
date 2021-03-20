@@ -1,0 +1,48 @@
+
+<div class="pb-4 mt-5 mb-2 border-bottom">
+    <h1>Add Project</h1>
+</div>
+
+<form [formGroup]="projForm" (submit)="onAddSubmit()">
+    <div class = "form-group">
+        <label>Title:</label>
+        <input type="text" formControlName="title" name="title" class="form-control">
+    </div>
+    <div formGroupName = "body">
+        <div class = "form-group">
+            <h3>Details:</h3>
+            <label>
+                Short Description:
+                <input type="text" formControlName = "shortDescription">
+            </label>
+            <label>
+                Description:
+                <input type = "text" formControlName = "description">
+            </label>
+            <label>
+                Worked With:
+                <input type = "text" formControlName = "workedWith">
+            </label>
+            <label>
+                Worked Under:
+                <input type = "text" formControlName = "workedUnder">
+            </label>
+            <label>
+                Inspiration:
+                <input type = "text" formControlName = "inspiration">
+            </label>
+            <label>
+                Challenges:
+                <input type = "text" formControlName = "challenges">
+            </label>
+        </div>
+    </div>
+    <div class = "form-group">
+        <label>Repository:</label>
+        <input type = "text" formControlName = "repo" name = "repo" class = "form-control">
+    </div>
+    <div class = "form-group">
+        <label>Demo URL:</label>
+        <input type = "text" formControlName = "demoUrl" name = "demoUrl" class = "form-control">
+    </div>
+</form>
