@@ -1,0 +1,110 @@
+
+<div class="pb-4 mt-5 mb-2 border-bottom">
+    <h1>Register</h1>
+</div>
+<form [formGroup]="regForm" (submit)="onRegisterSubmit()">
+    <div class = "form-group">
+        <label>Name:</label>
+        <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">Name is required</div>
+        </div>
+    </div>
+    <div class = "form-group">
+        <label>Username:</label>
+        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Username is required</div>
+        </div>
+    </div>
+    <div class = "form-group">
+        <label>Email:</label>
+        <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">email is required</div>
+        </div>
+    </div>
+    <div class = "form-group">
+        <label>Password:</label>
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+    </div>
+    <div class = "form-group">
+        <label>Role</label>
+        <div formGroupName="role">
+            <div class="row">
+                <div class="col-xs-6">
+                    <button type="button" (click)="setRoleType(REG_DATA.STUDENT)">
+                    {{ REG_DATA.STUDENT }}
+                    </button>
+                </div>
+                <div class="col-xs-6">
+                    <button type="button" (click)="setRoleType(REG_DATA.TEACHER)">
+                    {{ REG_DATA.TEACHER }}
+                    </button>
+                </div>
+                <div class="col-xs-6">
+                    <button type="button" (click)="setRoleType(REG_DATA.UNIVERSITY)">
+                    {{ REG_DATA.UNIVERSITY }}
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="regForm.controls.role.controls.type.value === REG_DATA.STUDENT">
+                <div class="panel-body">
+    
+                    <!--Enrollment No-->
+                    <div formGroupName="student">
+                        <label>Enrollment No</label>
+                        <input type="text" formControlName="enrollmentNo">
+                        <small *ngIf="!regForm.controls.role.controls.student.controls.enrollmentNo.valid">
+                        Required.
+                        </small>
+                    </div>
+            </div>
+            <div *ngIf="regForm.controls.role.controls.type.value === REG_DATA.TEACHER">
+                <div class="panel-body">
+    
+                    <!--Enrollment No-->
+                    <div formGroupName="teacher">
+                        <label>DEPARTMENT</label>
+                        <input type="text" formControlName="department">
+                        <small *ngIf="!regForm.controls.role.controls.teacher.controls.department.valid">
+                        Required.
+                        </small>
+                    </div>
+            </div>
+            <div *ngIf="regForm.controls.role.controls.type.value === REG_DATA.UNIVERSITY">
+                <div class="panel-body">
+    
+                    <!--NAME-->
+                    <div formGroupName="university">
+                        <label>NAME</label>
+                        <input type="text" formControlName="name">
+                        <small *ngIf="!regForm.controls.role.controls.university.controls.name.valid">
+                        Required.
+                        </small>
+                    </div>
+            </div>
+    </div>
+    <div class = "form-group">
+        <label>Phone No:</label>
+        <input type="text" formControlName="phoneNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }" />
+        <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
+            <div *ngIf="f.password.phoneNo.required">phoneNo is required</div>
+        </div>
+    </div>
+    <div [formGroup]="socialForm">
+        <label>Social Profiles:</label>
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Enter Github" formControlName="github">
+        </div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Enter Linkedin" formControlName="linkedin">
+        </div>
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Submit">
+</form>

@@ -28,47 +28,66 @@ const UserSchema = mongoose.Schema({
         required: true
     },
     role: {
-        type: String,
-        enum: ['student', 'teacher', 'university'],
+        type:{
+            type: String,
+            enum: ['student', 'teacher', 'university']
+        }
     },
     department: {
         type: String,
         required: function (){
-            return this.roles === "teacher"
+            return this.role.type === "teacher"
         }
     },
     enrollmentNo: {
         type: Number,
         trim: true,
         unique: function (){
-            return this.roles === "student"
+            return this.role.type === "student"
         },
-        validate: [/^\d{11}$/, 'Please fill in a valid Roll No'],
+        validate:  {
+            validator: function(value){
+                if (this.role.type !== 'student'){
+                    return true;
+                }
+                else{
+                    return /^$|^\d{11}$/.test(value);
+                }
+                
+            },
+            message: 'Invalid Enrollment Number'
+        },
         required: function (){
-            return this.roles === "student"
+            return this.role.type === "student"
         },
         default: null
 
     },
-    phoneNo: [{
+    phoneNo: {
         type: Number,
         trim: true,
         unique: true,
-        validate: [/^\d{10}$/, 'Please fill a valid telephone number']
+        validate:  {
+            validator: function(value){
+                    return /^$|^\d{10}$/.test(value);
+            },
+            message: 'Invalid Phone Number'
+        },
     
-    }],
+    },
     social: {
         github:{
             type: String,
             trim: true,
             sparse: true,
-            validate: [/^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$/i,'Please fill a valid github profile link']
+            validate: [/^$|^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$/i, 'Please fill a valid github profile link']
+
         },
         linkedIn: {
             type: String,
             trim: true,
             sparse: true,
-            validate: [/((https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/)((([\w]{2,3})?)|([^\/]+\/(([\w|\d-&#?=])+\/?){1,}))$/i, 'Please fill a valid Linkedin Profile link']
+            validate: [/^$|((https?:\/\/)?((www|\w\w)\.)?linkedin\.com\/)((([\w]{2,3})?)|([^\/]+\/(([\w|\d-&#?=])+\/?){1,}))$/i, 'Please fill a valid Linkedin Profile link']
 
         },
     },
@@ -85,6 +104,8 @@ const UserSchema = mongoose.Schema({
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;
+
+
 
 module.exports.getUserById = function(id, callback){
     User.findById(id, callback);
