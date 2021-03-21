@@ -1,5 +1,5 @@
 <div class="pb-4 mt-5 mb-2 border-bottom">
-    <h1>Project Gallery</h1>
+    <h1 [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"><a style = "color:white;" [routerLink] = "['/', username, 'projectGallery']">Project Gallery</a></h1>
 </div>
 <div *ngFor="let project of projectGal">
     <div class="d-flex justify-content-between" style="float:left">
@@ -16,7 +16,7 @@
                 {{project.body.shortDescription}}
               </p>
               <div [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" >
-              <a mdbBtn color="pink" class="waves-light" mdbWavesEffect  [routerLink] = "['..', 'project', project.title]">
+              <a mdbBtn color="pink" class="waves-light" mdbWavesEffect  [routerLink] = "['/', username, 'project', project.title]">
                 <mdb-icon far icon="clone" class="left"></mdb-icon>
                 View project</a
               ></div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {Observable} from 'rxjs';
@@ -19,6 +19,7 @@ export class AuthService {
   user: any;
   project: any;
   projurl: any;
+  username: String;
 
 
   constructor(
@@ -72,11 +73,22 @@ export class AuthService {
     localStorage.clear();
   }
 
+  getAnyProfile(username: String){
+    this.projurl = 'http://localhost:5000/users';
+    let headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.get<any>(
+      `${this.projurl}/view/${username}`,
+      {headers: headers}
+    ).pipe(map(res => res));
+  }
+
   getProfile(){
+    this.username = this.getCurrentUser();
+    this.projurl = 'http://localhost:5000/users';
     this.loadToken();
     let headers = new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json'});
     return this.http.get<any>(
-      "http://localhost:5000/users/profile",
+      `${this.projurl}/${this.username}`,
       {headers: headers}
     ).pipe(map(res => res));
 
@@ -99,6 +111,10 @@ export class AuthService {
       `${this.projurl}/${username}/projectGallery`,
       {headers: headers}
     ).pipe(map(res => res));
+  }
+
+  getCurrentUser(){
+    return JSON.parse(localStorage.getItem('user')).username;
   }
 
   loadToken(){
