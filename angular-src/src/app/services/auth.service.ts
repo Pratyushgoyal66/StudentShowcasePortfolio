@@ -74,7 +74,6 @@ export class AuthService {
   }
 
 
-=======
   getAnyProfile(username: String){
     this.projurl = 'http://localhost:5000/users';
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
@@ -87,7 +86,6 @@ export class AuthService {
   getProfile(){
     this.username = this.getCurrentUser();
     this.projurl = 'http://localhost:5000/users';
->>>>>>> a9e9ded0bad283e5ddd357f501d38f102b0fe706
     this.loadToken();
     let headers = new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json'});
     return this.http.get<any>(

@@ -29,7 +29,6 @@ export class ProfileComponent implements OnInit {
 
     this.username = this.route.snapshot.paramMap.get('username');
     this.authService.getAnyProfile(this.username).subscribe(profile => {
->>>>>>> a9e9ded0bad283e5ddd357f501d38f102b0fe706
       this.user = profile.user;
     },
     err => {

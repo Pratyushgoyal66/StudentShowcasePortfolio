@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.getProfile("randomString").subscribe(profile => {
+    this.authService.getProfile().subscribe(profile => {
  
       this.username = profile.user.username;
     },
