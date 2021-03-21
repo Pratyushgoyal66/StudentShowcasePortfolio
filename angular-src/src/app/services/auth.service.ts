@@ -70,6 +70,8 @@ export class AuthService {
   logout(){
     this.authToken = null;
     this.user = null;
+    localStorage.removeItem('user');
+    localStorage.clear();
     localStorage.clear();
   }
 
@@ -116,6 +118,10 @@ export class AuthService {
 
   getCurrentUser(){
     return JSON.parse(localStorage.getItem('user')).username;
+
+
+    
+    
   }
 
   loadToken(){

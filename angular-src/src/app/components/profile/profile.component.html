@@ -1,5 +1,6 @@
-<div class="pb-4 mt-5 mb-2 border-bottom">
-    <h2 class="page-header"> {{user.name}} </h2>
+<div *ngIf="user">
+  <div class="pb-4 mt-5 mb-2 border-bottom">
+      <h2 class="page-header"> {{user.name}} </h2>
+  </div>
 </div>
-
 <app-project-gallery></app-project-gallery>

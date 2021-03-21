@@ -69,8 +69,8 @@ export class RegisterComponent implements OnInit {
       enrollmentNo: Number,
       department: String
     }
-    user.name = rawUser.name;
-    user.username = rawUser.username;
+    user.name = user.name ? rawUser.name.charAt(0).toUpperCase() + rawUser.name.substr(1).toLowerCase(): '';
+    user.username = rawUser.username.toLowerCase();
     user.email =  rawUser.email;
     user.password = rawUser.password;
     if(rawUser.phoneNo !== ''){

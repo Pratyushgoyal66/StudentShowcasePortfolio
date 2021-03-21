@@ -20,6 +20,8 @@ import { ProjectGalleryComponent } from './components/project-gallery/project-ga
 import { AddProjectComponent } from './components/add-project/add-project.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IonicStorageModule } from '@ionic/storage-angular';
+
 const appRoutes: Routes = [
   {path : '', component: HomeComponent},
   {path : 'register', component: RegisterComponent, canActivate: [AuthGuardLoggedIn]},
@@ -56,7 +58,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule.forRoot(),
     MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [ValidateService, AuthService, AuthGuardLoggedOut, AuthGuardLoggedIn],
   bootstrap: [AppComponent]
