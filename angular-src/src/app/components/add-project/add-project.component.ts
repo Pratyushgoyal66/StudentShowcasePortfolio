@@ -36,7 +36,7 @@ export class AddProjectComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.authService.getProfile().subscribe(profile => {
+    this.authService.getProfile("randomString").subscribe(profile => {
       this.projForm.controls['author'].setValue(profile.user.username);
     },
     err => {

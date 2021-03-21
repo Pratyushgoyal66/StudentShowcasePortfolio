@@ -72,7 +72,12 @@ export class AuthService {
     localStorage.clear();
   }
 
-  getProfile(){
+  returnCurrentUser(){
+    return JSON.parse(localStorage.getItem('user')).username;
+  }
+
+  getProfile(username: String){
+    username = this.returnCurrentUser();
     this.loadToken();
     let headers = new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json'});
     return this.http.get<any>(

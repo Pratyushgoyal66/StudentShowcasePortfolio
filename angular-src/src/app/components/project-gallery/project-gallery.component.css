@@ -1,0 +1,11 @@
+
+.jumbotron {
+    border-radius: 1em;
+    background-color: #B0A295;
+    color: white;
+}
+
+h1, h3 {
+    font-family: 'Quicksand';
+    font-weight: 800;
+}

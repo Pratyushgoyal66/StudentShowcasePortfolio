@@ -1,29 +1,31 @@
-<div class="pb-4 mt-5 mb-2 border-bottom">
-    <h1>Project Gallery</h1>
-</div>
-<div *ngFor="let project of projectGal">
-    <div class="d-flex justify-content-between" style="float:left">
+<div class="jumbotron jumbotron-fluid " style="margin-top: 70px;">
+  <div class="container">
+    <h1 class="display-5">Project Gallery</h1>
+    <div *ngFor="let project of projectGal">
+      <div class="d-flex justify-content-between" style="float:left">
         <!-- Card -->
         <mdb-card
           style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg')"
-          class="card-image mb-3 mx-2"
-        >
-          <!-- Content -->
+          class="card-image mb-3 mx-2">
           <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
             <div>
               <h3 class="card-title pt-2">{{project.title}}</h3>
               <p>
                 {{project.body.shortDescription}}
               </p>
-              <div [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" >
-              <a mdbBtn color="pink" class="waves-light" mdbWavesEffect  [routerLink] = "['..', 'project', project.title]">
-                <mdb-icon far icon="clone" class="left"></mdb-icon>
-                View project</a
-              ></div>
+              <div [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a mdbBtn color="pink" class="waves-light" mdbWavesEffect
+                  [routerLink]="['..', 'project', project.title]">
+                  <mdb-icon far icon="clone" class="left"></mdb-icon>
+                  View project
+                </a>
+              </div>
             </div>
           </div>
           <!-- Content -->
         </mdb-card>
         <!-- Card -->
       </div>
+    </div>
+  </div>
 </div>

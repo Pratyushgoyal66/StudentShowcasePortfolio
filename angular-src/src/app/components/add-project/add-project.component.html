@@ -1,49 +1,57 @@
-
-<div class="pb-4 mt-5 mb-2 border-bottom">
-    <h1>Add Project</h1>
+<div class="jumbotron jumbotron-fluid " style="margin-top: 70px;">
+    <div class="container">
+        <h1 class="display-5">Add Project</h1>
+        <form [formGroup]="projForm" (submit)="onAddSubmit()">
+            <div class="form-group">
+                <label>Title:</label>
+                <input type="text" formControlName="title" name="title" class="form-control">
+            </div>
+            <div formGroupName="body">
+                <div class="form-group">
+                    <h3>Details:</h3>
+                    <span class = "left">
+                        <label>
+                            Short Description:
+                            <textarea formControlName="shortDescription" class="form-control resize" TextMode="MultiLine">
+                            </textarea>   
+                        </label>
+                    </span>
+                    <span class = "right">
+                        <label>
+                            Description:
+                            <textarea formControlName="description" class="form-control resize" TextMode="MultiLine">
+                            </textarea>
+                        </label>
+                    </span>
+                    <div>
+                        <label>
+                            Worked With:
+                        </label>
+                        <input type="text" formControlName="workedWith" class="form-control">    
+                    </div>
+                    <label>
+                        Worked Under:
+                    </label>
+                    <input type="text" formControlName="workedUnder" class="form-control">
+                    <label>
+                        Inspiration:
+                    </label>
+                    <input type="text" formControlName="inspiration" class="form-control">
+                    <label>
+                        Challenges:
+                    </label>
+                    <input type="text" formControlName="challenges" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Repository:</label>
+                <input type="text" formControlName="repo" name="repo" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Demo URL:</label>
+                <input type="text" formControlName="demoUrl" name="demoUrl" class="form-control">
+            </div>
+            <input type="submit" class="btn btn-dard submitForm" value="Submit">
+        </form>
+    </div>
 </div>
-
-<form [formGroup]="projForm" (submit)="onAddSubmit()">
-    <div class = "form-group">
-        <label>Title:</label>
-        <input type="text" formControlName="title" name="title" class="form-control">
-    </div>
-    <div formGroupName = "body">
-        <div class = "form-group">
-            <h3>Details:</h3>
-            <label>
-                Short Description:
-                <input type="text" formControlName = "shortDescription">
-            </label>
-            <label>
-                Description:
-                <input type = "text" formControlName = "description">
-            </label>
-            <label>
-                Worked With:
-                <input type = "text" formControlName = "workedWith">
-            </label>
-            <label>
-                Worked Under:
-                <input type = "text" formControlName = "workedUnder">
-            </label>
-            <label>
-                Inspiration:
-                <input type = "text" formControlName = "inspiration">
-            </label>
-            <label>
-                Challenges:
-                <input type = "text" formControlName = "challenges">
-            </label>
-        </div>
-    </div>
-    <div class = "form-group">
-        <label>Repository:</label>
-        <input type = "text" formControlName = "repo" name = "repo" class = "form-control">
-    </div>
-    <div class = "form-group">
-        <label>Demo URL:</label>
-        <input type = "text" formControlName = "demoUrl" name = "demoUrl" class = "form-control">
-    </div>
-    <input type="submit" class="btn btn-primary" value="Submit">
-</form>
