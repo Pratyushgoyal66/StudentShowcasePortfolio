@@ -73,8 +73,8 @@ export class AuthService {
     localStorage.clear();
   }
 
-<<<<<<< HEAD
 
+=======
   getAnyProfile(username: String){
     this.projurl = 'http://localhost:5000/users';
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
