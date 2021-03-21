@@ -18,14 +18,17 @@ export class NavbarComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.getProfile().subscribe(profile => {
+      this.authService.getProfile().subscribe(profile => {
  
-      this.username = profile.user.username;
-    },
-    err => {
-      console.log(err);
-      return false;
-    });
+        this.username = profile.user.username;
+      },
+      err => {
+        console.log(err);
+        return false;
+      });
+      
+
+
 
   }
   onLogoutClick(){
