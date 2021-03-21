@@ -74,13 +74,7 @@ export class AuthService {
   }
 
 <<<<<<< HEAD
-  returnCurrentUser(){
-    return JSON.parse(localStorage.getItem('user')).username;
-  }
 
-  getProfile(username: String){
-    username = this.returnCurrentUser();
-=======
   getAnyProfile(username: String){
     this.projurl = 'http://localhost:5000/users';
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
