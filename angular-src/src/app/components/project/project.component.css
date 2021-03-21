@@ -1,0 +1,11 @@
+.list-group-item {
+    border-radius: 1em;
+    background-color: #B0A295;
+    color: white;
+    margin-top: 2.5px;
+}
+
+.border-bottom {
+    font-family: 'Quicksand';
+    font-weight: 800;
+}

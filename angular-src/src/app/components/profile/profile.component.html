@@ -1,12 +1,6 @@
 <div *ngIf="user">
-
-    <div class="pb-4 mt-5 mb-2 border-bottom">
-        <h2 class="page-header"> {{user.name}} </h2>
-    </div>
-        <ul class = "list-group">
-            <li class= "list-group-item">Username: {{user.username}}</li>
-            <li class= "list-group-item">Email: {{user.email}}</li>
-        </ul>
-        <app-project-gallery></app-project-gallery>
-
+  <div class="pb-4 mt-5 mb-2 border-bottom">
+      <h2 class="page-header"> {{user.name}} </h2>
+  </div>
 </div>
+<app-project-gallery></app-project-gallery>

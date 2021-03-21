@@ -1,0 +1,12 @@
+#navBar {
+    background-color: #5D5C61 !important;
+    color : white;
+}
+
+.navbar-brand {
+    font-family: 'Quicksand';
+}
+
+li {
+    padding-left: 15px;
+}
