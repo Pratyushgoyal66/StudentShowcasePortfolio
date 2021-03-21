@@ -83,6 +83,19 @@ router.get('/:username', passport.authenticate('jwt', {session:false}), (req, re
     res.json({user: req.user});
 });
 
+//View UserPage
+router.get('/view/:username', (req, res, next) => {
+    User.getUserByUsername(req.params.username, (err, user) =>{
+        if (err) throw err;
+        if (!user) {
+            return res.json({success:false, msg: "User not found"})}
+        else{
+            console.log(user);
+            return res.json({user:user});
+        }
+    });
+});
+
 
 
 //Projects Gallery

@@ -27,16 +27,14 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(){
 
-    this.authService.getProfile().subscribe(profile => {
-      this.sub = this.route.paramMap.subscribe(params => {
-        this.username = params['username'];
-      });
+    this.username = this.route.snapshot.paramMap.get('username');
+    this.authService.getAnyProfile(this.username).subscribe(profile => {
       this.user = profile.user;
     },
     err => {
-      console.log(err);
       return false;
     });
+
   }
 
 }
