@@ -3,8 +3,8 @@
     <h1 class="display-5">Student Showcase Portfolio</h1>
     <p class="lead ">Let your work make some noise. </p>
     <div class="pt-5">
-      <a class="btn btn-dark right" id = "register" [routerLink]="['/register']">Register</a> 
-      <a class="btn btn-dark right" id = "login" [routerLink]="['/login']">Login</a>
+      <a *ngIf = "!authService.loggedIn()" class="btn btn-dark right" id = "register" [routerLink]="['/register']">Register</a> 
+      <a *ngIf = "!authService.loggedIn()" class="btn btn-dark right" id = "login" [routerLink]="['/login']">Login</a>
     </div>
   </div>
 </div>

@@ -44,6 +44,7 @@ const appRoutes: Routes = [
     ProjectGalleryComponent,
     AddProjectComponent,
     AddProjectComponent,
+    
 
   ],
   imports: [

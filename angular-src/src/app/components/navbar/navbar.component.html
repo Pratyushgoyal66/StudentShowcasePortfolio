@@ -8,7 +8,7 @@
 
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink] = "['/']">Home <span></span></a></li>
-            <li class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink]= "[username, 'projectGallery']">Project Gallery</a></li>
+            <li *ngIf = "authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink]= "[username, 'projectGallery']">Project Gallery</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">
             <li *ngIf = "!authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink] = "['/login']">Login </a></li>
