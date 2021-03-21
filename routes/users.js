@@ -145,7 +145,7 @@ router.post('/:username/addProject',  passport.authenticate('jwt', {session:fals
                     author: user.name,
                     title: req.body.title,
                     body: req.body.body,
-                    demoUrl: req.body.demoUrl,
+                    demoId: req.body.demoId,
                     repo: req.body.repo
                 });
                 newProject.save((err, proj) => { 

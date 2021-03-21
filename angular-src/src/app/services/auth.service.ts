@@ -38,7 +38,6 @@ export class AuthService {
 
   addProject(project){
     this.loadToken();
-    console.log(project);
     this.projurl = 'http://localhost:5000/users';
     let headers = new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json'});
     return this.http.post<any>(

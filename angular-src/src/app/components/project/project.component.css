@@ -9,3 +9,9 @@
     font-family: 'Quicksand';
     font-weight: 800;
 }
+.youtube {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;   
+}

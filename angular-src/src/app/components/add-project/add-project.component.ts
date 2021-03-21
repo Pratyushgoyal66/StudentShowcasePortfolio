@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import {Observable} from 'rxjs';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-add-project',
@@ -25,7 +26,7 @@ export class AddProjectComponent implements OnInit {
       challenges: new FormControl('') 
     }),
     repo : new FormControl(''),
-    demoUrl: new FormControl('') 
+    demoId: new FormControl('') 
   });
 
   constructor(
@@ -60,13 +61,13 @@ export class AddProjectComponent implements OnInit {
         challenges: String
       },
       repo: String,
-      demoUrl: String
+      demoId: String,
     };
     project.author = rawProj.author;
     project.title = rawProj.title;
     project.body = rawProj.body;
     project.repo = rawProj.repo;
-    project.demoUrl = rawProj.demoUrl;
+    project.demoId = rawProj.demoId;
 
 
     //addProject
