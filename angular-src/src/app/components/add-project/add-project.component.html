@@ -4,7 +4,7 @@
         <form [formGroup]="projForm" (submit)="onAddSubmit()">
             <div class="form-group">
                 <label>Title:</label>
-                <input type="text" formControlName="title" name="title" class="form-control">
+                <input type="text" formControlName="title" name="title" class="form-control" required>
             </div>
             <div formGroupName="body">
                 <div class="form-group">
@@ -12,46 +12,50 @@
                     <span class = "left">
                         <label>
                             Short Description:
-                            <textarea formControlName="shortDescription" class="form-control resize" TextMode="MultiLine">
+                            <textarea formControlName="shortDescription" class="form-control resize" TextMode="MultiLine" maxlength="50" required>
                             </textarea>   
                         </label>
                     </span>
                     <span class = "right">
                         <label>
                             Description:
-                            <textarea formControlName="description" class="form-control resize" TextMode="MultiLine">
+                            <textarea formControlName="description" class="form-control resize" TextMode="MultiLine" required>
                             </textarea>
                         </label>
                     </span>
                     <div>
-                        <label>
-                            Worked With:
-                        </label>
-                        <input type="text" formControlName="workedWith" class="form-control">    
+                        <span class = "left">
+                            <label>
+                                Worked With:
+                                <input type="text" formControlName="workedWith" class="form-control resizeSmall" required>    
+                            </label>
+                        </span>
+                        <span class = "right">
+                            <label>
+                                Worked Under:
+                                <input type="text" formControlName="workedUnder" class="form-control resizeSmall">
+                            </label>
+                        </span>
                     </div>
-                    <label>
-                        Worked Under:
-                    </label>
-                    <input type="text" formControlName="workedUnder" class="form-control">
                     <label>
                         Inspiration:
                     </label>
-                    <input type="text" formControlName="inspiration" class="form-control">
+                    <input type="text" formControlName="inspiration" class="form-control" required>
                     <label>
                         Challenges:
                     </label>
-                    <input type="text" formControlName="challenges" class="form-control">
+                    <input type="text" formControlName="challenges" class="form-control" required>
                 </div>
             </div>
             <div class="form-group">
                 <label>Repository:</label>
-                <input type="text" formControlName="repo" name="repo" class="form-control">
+                <input type="text" formControlName="repo" name="repo" class="form-control" required>
             </div>
             <div class="form-group">
                 <label>Demo URL:</label>
-                <input type="text" formControlName="demoUrl" name="demoUrl" class="form-control">
+                <input type="text" formControlName="demoUrl" name="demoUrl" class="form-control" required>
             </div>
-            <input type="submit" class="btn btn-dard submitForm" value="Submit">
+            <input type="submit" class="btn btn-dard submitForm" value="SUBMIT">
         </form>
     </div>
 </div>

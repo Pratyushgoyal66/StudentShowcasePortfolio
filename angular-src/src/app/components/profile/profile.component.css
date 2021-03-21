@@ -1,0 +1,19 @@
+
+.jumbotron {
+    border-radius: 1em;
+    background-color: #B0A295;
+    color: white;
+}
+
+h2 {
+    font-family: 'Quicksand';
+    font-weight: 800;
+    font-size: 4rem;
+}
+
+
+.list-group-item {
+    background-color: #B0A295;
+    border-color: #5D5C61;
+    box-shadow: 1px 1px #5D5C61;
+}

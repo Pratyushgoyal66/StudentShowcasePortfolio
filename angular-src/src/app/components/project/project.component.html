@@ -1,8 +1,20 @@
 <div *ngIf="project">
-
-    <h2 class="page-header"> {{project.title}} </h2>
-        <ul class = "list-group">
-            <li class= "list-group-item">Author: {{project.author}}</li>
-        </ul>
-
+    <div class="pb-4 mt-5 mb-2 border-bottom">
+        <h2 class="page-header"> {{project.title}} </h2>
     </div>
+    <ul class="list-group">
+        <li class="list-group-item"><strong>Author</strong>: {{project.author}}</li>
+        <li class="list-group-item"><strong>Description</strong>: {{project.body.description}}</li>
+        <li class="list-group-item"><strong>Worked With</strong>: {{project.body.workedWith}}</li>
+        <li class="list-group-item"><strong>Worked Under</strong>: {{project.body.workedUnder}}</li>
+        <li class="list-group-item"><strong>Inspiration</strong>: {{project.body.inspiration}}</li>
+        <li class="list-group-item"><strong>Challenges</strong>: {{project.body.challenges}}</li>
+        <li class="list-group-item"><strong>Challenges</strong>: {{project.body.challenges}}</li>
+        <li class="list-group-item"><strong>Repository</strong>: <a href={{project.repo}}
+                style="color:white;">{{project.repo}}</a></li>
+        <li class="list-group-item"><strong>Youtube Video ID</strong>: <a href={{project.demoUrl}}
+                style="color:white;">{{project.demoUrl}}</a></li>
+    </ul>
+    
+
+</div>
