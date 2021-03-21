@@ -16,6 +16,7 @@ interface User {
 })
 export class ProfileComponent implements OnInit {
 
+
   user: User;
   username: String;
   private sub: any;
@@ -23,7 +24,9 @@ export class ProfileComponent implements OnInit {
   constructor(    
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {
+
+     }
 
   ngOnInit(){
 
@@ -35,6 +38,12 @@ export class ProfileComponent implements OnInit {
       return false;
     });
 
+    
+
   }
+
+
+
+
 
 }
