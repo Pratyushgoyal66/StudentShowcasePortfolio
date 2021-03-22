@@ -29,7 +29,6 @@ export class ProfileComponent implements OnInit {
      }
 
   ngOnInit(){
-
     this.username = this.route.snapshot.paramMap.get('username');
     this.authService.getAnyProfile(this.username).subscribe(profile => {
       this.user = profile.user;
@@ -37,13 +36,7 @@ export class ProfileComponent implements OnInit {
     err => {
       return false;
     });
-
     
-
   }
-
-
-
-
 
 }

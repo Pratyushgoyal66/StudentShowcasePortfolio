@@ -82,7 +82,6 @@ export class RegisterComponent implements OnInit {
     if(rawUser.enrollmentNo !== ''){
       user.enrollmentNo = rawUser.enrollmentNo;
     }
- 
     user.department = rawUser.department;
     if(!this.validateService.validateRegister(user)){
       this.flashMessage.show('Please fill in all fields.', {cssClass: 'alert-danger', timeout:3000});

@@ -7,7 +7,9 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 
 //Connect to database
-mongoose.connect(config.database, { useNewUrlParser: true,  useUnifiedTopology: true } );
+mongoose.connect(config.database, { useNewUrlParser: true,  useUnifiedTopology: true,  } );
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
 //On Connection
 mongoose.connection.on('connected', () => {

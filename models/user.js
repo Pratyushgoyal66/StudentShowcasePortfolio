@@ -66,13 +66,20 @@ const UserSchema = mongoose.Schema({
     phoneNo: {
         type: Number,
         trim: true,
-        unique: true,
         validate:  {
             validator: function(value){
+                if (value == '' || value == null || value == undefined){
+                    return true;
+                }
+                else{
                     return /^$|^\d{10}$/.test(value);
+                }
+                
             },
             message: 'Invalid Phone Number'
         },
+        sparse: true,
+        unique: true,
     
     },
     social: {

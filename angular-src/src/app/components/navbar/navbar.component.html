@@ -14,7 +14,7 @@
             <li *ngIf = "!authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink] = "['/login']">Login </a></li>
             <li *ngIf = "!authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink] = "['/register']">Register </a></li>
             <li *ngIf = "authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink]= "[username, 'addProject']">Add Project</a></li>
-            <li *ngIf = "authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink]= "[username]">{{username}}</a></li>
+            <li *ngIf = "authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink]= "[username]">{{authService.getCurrentUser()}}</a></li>
             <li *ngIf = "authService.loggedIn()" class="nav-item" ><a (click) = "onLogoutClick()" class="nav-link" href="#" >Logout </a></li>
 
         </ul>
