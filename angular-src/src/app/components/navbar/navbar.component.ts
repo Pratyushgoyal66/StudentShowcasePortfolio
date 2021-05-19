@@ -9,8 +9,6 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  username: String;
-  private sub: any;
 
   constructor(    
     private flashMessage: FlashMessagesService,
@@ -25,6 +23,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
     return false;
   }
+  
 
 
 }
