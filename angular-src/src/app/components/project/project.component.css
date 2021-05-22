@@ -15,3 +15,9 @@
     margin-right: auto;
     width: 75%;   
 }
+.page-header {
+    display: inline-block;
+}
+.btn {
+    float: right;
+}

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 interface Project{
   _author: String,
@@ -40,6 +40,7 @@ export class ProjectComponent implements OnInit {
 
 
   constructor(    
+    private flashMessage: FlashMessagesService,
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
@@ -62,7 +63,19 @@ export class ProjectComponent implements OnInit {
     });
 
   }
-  
+  onDelete(){
+    if(confirm("Are you sure to delete "+ this.title)) {
+      this.authService.deleteProject(this.username, this.title).subscribe(data => {
+        if(data){
+          this.router.navigate([this.username]);
+          this.flashMessage.show('Deletion Successfull', {cssClass: 'alert-success', timeout:3000});
+        }
+        else{
+          this.flashMessage.show('Deletion Not Successfull', {cssClass: 'alert-danger', timeout:3000});
+        }
+      });
+    }
+  }
 
 
  

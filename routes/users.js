@@ -168,7 +168,7 @@ router.post('/:username/addProject',  passport.authenticate('jwt', {session:fals
     }
 });
 
-router.delete('/:username/project/:title', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+router.delete('/:username/project/:title/delete', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     if (req.user.username != req.params.username){
         res.send("Invalid user");
     }
@@ -184,7 +184,7 @@ router.delete('/:username/project/:title', passport.authenticate('jwt', {session
                         User.findByIdAndUpdate(proj._author, { $pull: {'projects': { '_id': proj._id, 'title': proj.title } } }, (err, pro) => {
                             if (err) throw err;
                             else{
-                                res.send({deleted: true});
+                                res.json({deleted: true});
                             }
                         });
                     }
