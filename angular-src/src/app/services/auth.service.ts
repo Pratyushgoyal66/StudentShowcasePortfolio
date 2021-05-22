@@ -47,11 +47,18 @@ export class AuthService {
     ).pipe(map(res => res));
   }
 
+  deleteProject(username: String, title: String){
+    this.loadToken();
+    this.projurl = 'http://localhost:5000/users';
+    let headers = new HttpHeaders({'Authorization': this.authToken});
+    return this.http.delete(
+      `${this.projurl}/${username}/project/${title}/delete`,
+      {headers: headers}
+    ).pipe(map(res => res));
+  }
 
   authenticateUser(user){
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
-    
-    
     return this.http.post<any>(
       "http://localhost:5000/users/authenticate",
       user,

@@ -90,7 +90,6 @@ router.get('/view/:username', (req, res, next) => {
         if (!user) {
             return res.json({success:false, msg: "User not found"})}
         else{
-            console.log(user);
             return res.json({user:user});
         }
     });
@@ -167,6 +166,33 @@ router.post('/:username/addProject',  passport.authenticate('jwt', {session:fals
 
         });
     }
+});
+
+router.delete('/:username/project/:title/delete', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    if (req.user.username != req.params.username){
+        res.send("Invalid user");
+    }
+    else{
+        Project.getProjectByTitle(req.params.title, (err, project) =>{
+            if (err) throw err;
+            if (!project) {return res.json({success:false, msg: "Project not found"})}
+            else{
+                var proj = project;
+                Project.findByIdAndDelete(proj._id, (err, docs) => {
+                    if(err) throw err;
+                    else{
+                        User.findByIdAndUpdate(proj._author, { $pull: {'projects': { '_id': proj._id, 'title': proj.title } } }, (err, pro) => {
+                            if (err) throw err;
+                            else{
+                                res.json({deleted: true});
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
 });
 
 module.exports = router;
