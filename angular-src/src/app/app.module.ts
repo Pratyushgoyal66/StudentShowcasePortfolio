@@ -21,6 +21,7 @@ import { AddProjectComponent } from './components/add-project/add-project.compon
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { SearchFilterPipe } from './components/searchFilter/search-filter.pipe';
 
 const appRoutes: Routes = [
   {path : '', component: HomeComponent},
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
     ProjectGalleryComponent,
     AddProjectComponent,
     AddProjectComponent,
+    SearchFilterPipe,
     
 
   ],

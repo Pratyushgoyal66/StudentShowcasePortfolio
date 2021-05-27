@@ -3,11 +3,40 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <form class="wrap">
+        <div class="search">
+          <h3>Search country by name filter : </h3>
+          <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by country name"
+            [(ngModel)]="searchTerm" (input)="searchFunc($event.target.value)" />
+        </div>
+      </form>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Country</th>
+            <th scope="col">Area</th>
+            <th scope="col">Population</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"  *ngFor="let user of users | searchFilter: searchTerm; index as i">
+            <td scope="row">{{ i + 1 }}</td>
+            <td>
+                
+
+              {{ user.name }}
+            </td>
+            <td><a class="nav-link" [routerLink] = "[user.username]">{{ user.username }}</a></td>
+            <td>{{ user.department }}</td>
+          </tr>
+        </tbody>
+      </table>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink] = "['/']">Home <span></span></a></li>
+            <li class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink] = "['/']">Home <span></span></a></li>z
             <li *ngIf = "authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink]= "[authService.getCurrentUser(), 'projectGallery']">Project Gallery</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">
