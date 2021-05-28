@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {Observable} from 'rxjs';
+import {of} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 import { ObserveOnOperator } from 'rxjs/internal/operators/observeOn';
@@ -127,6 +127,9 @@ export class AuthService {
   }
 
   search(word){
+    if (word === '') {
+      return of([]);
+    }
     var searchReq = {"username": word};
     this.projurl = 'http://localhost:5000/users';
     let headers = new HttpHeaders({'Content-Type': 'application/json'});

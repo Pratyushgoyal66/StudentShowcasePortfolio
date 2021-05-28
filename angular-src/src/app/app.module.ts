@@ -22,6 +22,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { SearchFilterPipe } from './components/searchFilter/search-filter.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   {path : '', component: HomeComponent},
@@ -61,7 +62,8 @@ const appRoutes: Routes = [
     FlashMessagesModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    NgbModule
   ],
   providers: [ValidateService, AuthService, AuthGuardLoggedOut, AuthGuardLoggedIn],
   bootstrap: [AppComponent]

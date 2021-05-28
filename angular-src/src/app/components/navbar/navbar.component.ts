@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import {Observable, of, OperatorFunction} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -9,19 +11,41 @@ import { FlashMessagesService } from 'angular2-flash-messages';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  data;
+  searching = false;
+  searchFailed = false;
   users;
-  searchTerm;
+  sub;
+
+  formatter = (result) => result.username;
+
+  search: OperatorFunction<string, readonly {username}[]> = (text$: Observable<string>) =>
+  text$.pipe(
+    debounceTime(200),
+    distinctUntilChanged(),
+    tap(() => this.searching = true),
+    switchMap(term =>
+      this.authService.search(term).pipe(
+        tap(() => this.searchFailed = false),
+        catchError(() => {
+          this.searchFailed = true;
+          return of([]);
+        } )
+      )
+      ),
+      tap(() => this.searching = false)
+    
+  )
 
   constructor(    
     private flashMessage: FlashMessagesService,
     public authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { 
 
-  ngOnInit(): void {
-    this.authService.search('').subscribe(data =>{
-      this.data = data;
-    });
+    }
+
+  ngOnInit(): void { 
+
    }
   onLogoutClick(){
 
@@ -31,9 +55,6 @@ export class NavbarComponent implements OnInit {
     return false;
   }
 
-  searchFunc(value: String){
-    this.users = this.data.filter((val) => val.username.toLowerCase().includes(value));
-  }
 
 
 
