@@ -63,7 +63,7 @@ const appRoutes: Routes = [
     IonicStorageModule.forRoot(),
     NgbModule
   ],
-  providers: [ValidateService, AuthService, AuthGuardLoggedOut, AuthGuardLoggedIn, ProjectGalleryComponent],
+  providers: [ValidateService, AuthService, AuthGuardLoggedOut, AuthGuardLoggedIn],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

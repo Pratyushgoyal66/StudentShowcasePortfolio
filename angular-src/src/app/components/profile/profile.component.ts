@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { ProjectGalleryComponent } from '../project-gallery/project-gallery.component';
 
 
 interface User {
@@ -26,8 +25,7 @@ export class ProfileComponent implements OnInit {
   constructor(    
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
-    private projGalComp: ProjectGalleryComponent
+    private route: ActivatedRoute
     ) {
       this.navigationSubscription = this.router.events.subscribe((e: any) => {
         // If it is a NavigationEnd event re-initalise the component
