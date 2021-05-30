@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+
 
 interface User {
   name: String,
@@ -16,7 +17,7 @@ interface User {
 })
 export class ProfileComponent implements OnInit {
 
-
+  navigationSubscription;
   user: User;
   username: String;
   private sub: any;
@@ -24,7 +25,14 @@ export class ProfileComponent implements OnInit {
   constructor(    
     private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute
+    ) {
+      this.navigationSubscription = this.router.events.subscribe((e: any) => {
+        // If it is a NavigationEnd event re-initalise the component
+        if (e instanceof NavigationEnd) {
+          this.initialiseInvites();
+        }
+      });
 
      }
 
@@ -37,6 +45,24 @@ export class ProfileComponent implements OnInit {
       return false;
     });
     
+  }
+  ngOnDestroy() {
+    // avoid memory leaks here by cleaning up after ourselves. If we  
+    // don't then we will continue to run our initialiseInvites()   
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {  
+       this.navigationSubscription.unsubscribe();
+    }
+  }
+
+  initialiseInvites() {
+    this.username = this.route.snapshot.paramMap.get('username');
+    this.authService.getAnyProfile(this.username).subscribe(profile => {
+      this.user = profile.user;
+    },
+    err => {
+      return false;
+    });
   }
 
 }

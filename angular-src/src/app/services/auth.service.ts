@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {Observable} from 'rxjs';
+import {of} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 import { ObserveOnOperator } from 'rxjs/internal/operators/observeOn';
@@ -123,11 +123,21 @@ export class AuthService {
   }
 
   getCurrentUser(){
-    return JSON.parse(localStorage.getItem('user')).username;
+    return JSON.parse(localStorage.getItem('user')).username;    
+  }
 
-
-    
-    
+  search(word){
+    if (word === '') {
+      return of([]);
+    }
+    var searchReq = {"username": word};
+    this.projurl = 'http://localhost:5000/users';
+    let headers = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post<any>(
+      `${this.projurl}/search`,
+      searchReq,
+      {headers: headers}
+    ).pipe(map(res => res));
   }
 
   loadToken(){

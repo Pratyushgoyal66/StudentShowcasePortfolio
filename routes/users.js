@@ -142,6 +142,7 @@ router.post('/:username/addProject',  passport.authenticate('jwt', {session:fals
                 let newProject = new Project({
                     _author: user._id,
                     author: user.name,
+                    authorUsername: user.username,
                     title: req.body.title,
                     body: req.body.body,
                     demoId: req.body.demoId,
@@ -168,6 +169,7 @@ router.post('/:username/addProject',  passport.authenticate('jwt', {session:fals
     }
 });
 
+//Delete Project
 router.delete('/:username/project/:title/delete', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     if (req.user.username != req.params.username){
         res.send("Invalid user");
@@ -192,6 +194,30 @@ router.delete('/:username/project/:title/delete', passport.authenticate('jwt', {
             }
         });
     }
+
+});
+
+//Search
+router.post('/search', (req, res, next) => {
+    var query = {};
+
+    query.username = new RegExp(req.body.username, 'i');
+
+    User.find(query, (err, docs) => {
+        if(err){return res.status(400).send({msg:"error occurred"});}
+        if (!docs.length){
+            var newQuery = {};
+            newQuery.title = new RegExp(req.body.username, 'i');
+            Project.find(newQuery, (err, projects) => {
+                if(err){return res.status(400).send({msg:"error occurred"});}
+                return res.status(200).send(projects);
+            });
+        }
+        else{
+            return res.status(200).send(docs);
+        }
+        
+    });
 
 });
 

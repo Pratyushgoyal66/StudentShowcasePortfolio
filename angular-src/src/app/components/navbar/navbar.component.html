@@ -1,10 +1,22 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky" id = "navBar">
-    <a class="navbar-brand" href="#"><strong>S</strong>tudent <strong>S</strong>howcase <strong>P</strong>ortfolio</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Student Showcase Portfolio</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+      <ng-template #rt let-r="result" let-t="term">
+        <div *ngIf = 'r.username; then userSearch else projSearch'></div>  
+        <ng-template #userSearch [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"><a class="nav-link" style="color:black" [routerLink] = "[r.username]">{{r.username}}</a></ng-template>
+        <ng-template #projSearch [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"><a class="nav-link" style="color:black" [routerLink] = "[r.authorUsername, 'project', r.title]">{{r.title}} </a></ng-template>
+      </ng-template>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <input id="typeahead-http" type="text" class="form-control mx-sm-3" [class.is-invalid]="searchFailed" #input [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" [resultFormatter]="formatter" (selectItem)="onSelect($event, input)"/>
+      <small *ngIf="searching" class="form-text text-muted">searching...</small>
+      <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+      
+
+
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink] = "['/']">Home <span></span></a></li>
