@@ -13,9 +13,6 @@ import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} fro
 export class NavbarComponent implements OnInit {
   searching = false;
   searchFailed = false;
-  users;
-  model;
-  
 
   formatter = (result) => result.username;
 

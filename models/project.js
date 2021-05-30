@@ -12,6 +12,10 @@ const ProjectSchema = mongoose.Schema({
         type: String
     },
 
+    authorUsername: {
+        type: String
+    },
+
     title: {
         type: String,
         unique: true,
