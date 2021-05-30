@@ -21,14 +21,13 @@ import { AddProjectComponent } from './components/add-project/add-project.compon
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { SearchFilterPipe } from './components/searchFilter/search-filter.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const appRoutes: Routes = [
   {path : '', component: HomeComponent},
   {path : 'register', component: RegisterComponent, canActivate: [AuthGuardLoggedIn]},
   {path : 'login', component: LoginComponent, canActivate: [AuthGuardLoggedIn]},
-  {path : ':username', component: ProfileComponent, canActivate: [AuthGuardLoggedOut]},
+  {path : ':username', component: ProfileComponent, canActivate: [AuthGuardLoggedOut], runGuardsAndResolvers: 'always'},
   {path : ':username/project/:title', component: ProjectComponent},
   {path : ':username/addProject', component: AddProjectComponent, canActivate: [AuthGuardLoggedOut]},
   {path : ':username/projectGallery', component: ProjectGalleryComponent},
@@ -48,7 +47,6 @@ const appRoutes: Routes = [
     ProjectGalleryComponent,
     AddProjectComponent,
     AddProjectComponent,
-    SearchFilterPipe,
     
 
   ],
@@ -65,7 +63,7 @@ const appRoutes: Routes = [
     IonicStorageModule.forRoot(),
     NgbModule
   ],
-  providers: [ValidateService, AuthService, AuthGuardLoggedOut, AuthGuardLoggedIn],
+  providers: [ValidateService, AuthService, AuthGuardLoggedOut, AuthGuardLoggedIn, ProjectGalleryComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

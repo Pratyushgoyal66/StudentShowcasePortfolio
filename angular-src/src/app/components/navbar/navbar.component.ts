@@ -14,7 +14,8 @@ export class NavbarComponent implements OnInit {
   searching = false;
   searchFailed = false;
   users;
-  sub;
+  model;
+  
 
   formatter = (result) => result.username;
 
@@ -54,6 +55,11 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
     return false;
   }
+  onSelect($event, input) {
+    $event.preventDefault();
+    input.value = '';
+  }
+  
 
 
 
