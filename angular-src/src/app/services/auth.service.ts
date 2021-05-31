@@ -140,6 +140,22 @@ export class AuthService {
     ).pipe(map(res => res));
   }
 
+  postComment(projId, userId, comment){
+    const commentData = {
+      projId: projId,
+      userId: userId,
+      comment: comment
+    };
+    this.projurl = 'http://localhost:5000/users';
+    let headers = new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json'});
+    return this.http.post<any>(
+      `${this.projurl}/comment`,
+      commentData,
+      {headers: headers}
+    ).pipe(map(res => res));
+
+  }
+
   loadToken(){
     const token = localStorage.getItem('id_token');
     this.authToken = token;

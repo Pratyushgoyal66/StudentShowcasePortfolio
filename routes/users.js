@@ -221,4 +221,58 @@ router.post('/search', (req, res, next) => {
 
 });
 
+//Post Comment
+router.post('/comment', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    if (!req.body.comment) {
+        res.json({ success: false, message: 'No comment provided' }); // Return error message
+      } else {
+        // Check if id was provided in request body
+        if (!req.body.projId) {
+          res.json({ success: false, message: 'No Project id was provided' }); // Return error message
+        } else {
+            Project.findOne({_id: req.body.projId}, (err, project) => {
+                if(err){res.json({success:false, msg:'Invalid Id'});}
+                else{
+                    if(!project){
+                        res.json({success:false, msg:'Project not found'});
+                    }
+                    else{
+                        if (!req.body.userId) {
+                            res.json({ success: false, message: 'No User id was provided' }); // Return error message
+                          } 
+                        else {
+                            User.findOne({_id: req.body.userId}, (err, user) => {
+                                if (err) {
+                                    res.json({ success: false, message: 'Something went wrong' }); // Return error message
+                                } 
+                                else {
+                                    // Check if user was found in the database
+                                    if (!user) {
+                                      res.json({ success: false, message: 'User not found.' }); // Return error message
+                                    } 
+                                    else {
+                                        project.comments.push({
+                                            comment: req.body.comment,
+                                            commentator: user.username
+                                        });
+
+                                        project.save((err) => {
+                                            if(err){
+                                                res.json({ success: false, message: 'Something went wrong.' }); // Return error message
+                                            }
+                                            else{
+                                                res.json({ success: true, message: 'Comment saved' }); // Return success message
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }    
+                    }
+                }
+            });
+        }
+    }
+});
+
 module.exports = router;
