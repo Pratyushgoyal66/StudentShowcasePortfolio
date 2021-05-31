@@ -275,4 +275,40 @@ router.post('/comment', passport.authenticate('jwt', {session:false}), (req, res
     }
 });
 
+//Post new Rating
+router.post('/rating', passport.authenticate('jwt', {session:false}), (req, res) => {
+    var review = req.body.review;
+
+    // Project.findById(review.projId, (err, project) => {
+    //     if (err) throw err;
+    //     if (!project){
+            
+    //     }
+    //     else{
+    //         if(project.rating.aggRating.reviewer.includes(review.reviewer) && )
+    //     }
+    // })
+    Project.findByIdAndUpdate(review.projId, { $inc: {'rating.aggRating.totalRating':  review.ratingGiven, 'rating.aggRating.noOfReviews':  1}, $push: { "rating.aggRating.reviewer.username": review.reviewer, "rating.aggRating.reviewer.rated": review.ratingGiven} }, {new:true}, (err, project) => {
+                                if(err) throw err;
+                                if(!project){
+                                    res.json({"updated": false});
+                                }
+                                else{
+                                    res.json({'updated': true});
+                                }
+                                
+    });
+});
+
+// //Get Ratings
+// router.get('/rating/:projId', (req, res) => {
+//     var projId = req.params.projId;
+//     Project.findById(projId, (err, project) => {
+//         if (err) throw err;
+//         else {
+//             res.json(project);
+//         }
+//     } )
+// });
+
 module.exports = router;
