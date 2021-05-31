@@ -3,6 +3,29 @@ const config = require('../config/database');
 const User = require('./user');
 
 
+let commentLengthChecker = (comment) => {
+    // Check if comment exists
+    if (!comment[0]) {
+      return false; // Return error
+    } else {
+      // Check comment length
+      if (comment[0].length < 1 || comment[0].length > 200) {
+        return false; // Return error if comment length requirement is not met
+      } else {
+        return true; // Return comment as valid
+      }
+    }
+  };
+  
+  // Array of Comment validators
+  const commentValidators = [
+    // First comment validator
+    {
+      validator: commentLengthChecker,
+      message: 'Comments may not exceed 200 characters.'
+    }
+  ];
+
 //Projects Schema
 const ProjectSchema = mongoose.Schema({
     _author: {
@@ -56,7 +79,10 @@ const ProjectSchema = mongoose.Schema({
         type: Date, 
         default: Date.now
     },
-    comments: [{body: String, date: Date}],
+    comments: [{
+        comment: { type: String, validate: commentValidators },
+        commentator: { type: String }
+    }],
     rating: {
         aggRating: {
             type: Number
