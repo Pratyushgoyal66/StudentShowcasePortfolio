@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import {Observable, of, OperatorFunction} from 'rxjs';
-import {catchError, debounceTime, distinctUntilChanged, map, tap, switchMap} from 'rxjs/operators';
+import {catchError, debounceTime, distinctUntilChanged, tap, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -16,8 +16,8 @@ export class NavbarComponent implements OnInit {
 
   formatter = (result) => result.username;
 
-  search: OperatorFunction<string, readonly {username}[]> = (text$: Observable<string>) =>
-  text$.pipe(
+  search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
+    text$.pipe(
     debounceTime(200),
     distinctUntilChanged(),
     tap(() => this.searching = true),
@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
         } )
       )
       ),
-      tap(() => this.searching = false)
+      tap(() => this.searching = false),
     
   )
 
@@ -52,6 +52,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
     return false;
   }
+  
   onSelect($event, input) {
     $event.preventDefault();
     input.value = '';

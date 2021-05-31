@@ -133,9 +133,8 @@ export class AuthService {
     var searchReq = {"username": word};
     this.projurl = 'http://localhost:5000/users';
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post<any>(
-      `${this.projurl}/search`,
-      searchReq,
+    return this.http.get<any>(
+      `${this.projurl}/search/${word}`,
       {headers: headers}
     ).pipe(map(res => res));
   }

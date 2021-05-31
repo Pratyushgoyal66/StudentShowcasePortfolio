@@ -198,16 +198,16 @@ router.delete('/:username/project/:title/delete', passport.authenticate('jwt', {
 });
 
 //Search
-router.post('/search', (req, res, next) => {
+router.get('/search/:query', (req, res, next) => {
     var query = {};
 
-    query.username = new RegExp(req.body.username, 'i');
+    query.username = new RegExp(req.params.query, 'i');
 
     User.find(query, (err, docs) => {
         if(err){return res.status(400).send({msg:"error occurred"});}
         if (!docs.length){
             var newQuery = {};
-            newQuery.title = new RegExp(req.body.username, 'i');
+            newQuery.title = new RegExp(req.params.query, 'i');
             Project.find(newQuery, (err, projects) => {
                 if(err){return res.status(400).send({msg:"error occurred"});}
                 return res.status(200).send(projects);
