@@ -155,6 +155,23 @@ export class AuthService {
 
   }
 
+  postRating(projId, ratingGiven, reviewer){
+    var review = {
+      'review': {
+        'projId': projId,
+        'ratingGiven': ratingGiven,
+        'reviewer': reviewer
+      }
+    };
+    this.projurl = 'http://localhost:5000/users';
+    let headers = new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json'});
+    return this.http.post<any>(
+      `${this.projurl}/rating`,
+      review,
+      {headers: headers}
+    ).pipe(map(res => res));
+  }
+
   loadToken(){
     const token = localStorage.getItem('id_token');
     this.authToken = token;

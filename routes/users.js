@@ -278,22 +278,21 @@ router.post('/comment', passport.authenticate('jwt', {session:false}), (req, res
 //Post new Rating
 router.post('/rating', passport.authenticate('jwt', {session:false}), (req, res) => {
     var review = req.body.review;
-    var flag = false;
-    var username = review.reviewer;
 
-            Project.findByIdAndUpdate(review.projId, { $pull : {'rating.aggRating.reviewer': {'username': review.reviewer, 'rated': { $gte: 0 }} }  }, (err, docs) => {
-                if (err) throw err;
-            });
-            Project.findByIdAndUpdate(review.projId, { $inc: {'rating.aggRating.totalRating':  review.ratingGiven, 'rating.aggRating.noOfReviews':  1}, $push: { "rating.aggRating.reviewer": {"username": review.reviewer, "rated": review.ratingGiven}} }, {new:true}, (err, project) => {
-                if(err) throw err;
-                if(!project){
-                    return res.json({"updated": false});
-                }
-                else{
-                    return res.json({'updated': true});
-                }
-                
-            });
+    Project.findByIdAndUpdate(review.projId, { $pull : {'rating.aggRating.reviewer': {'username': review.reviewer, 'rated': { $gte: 0 }} }}, (err, docs) => {
+        if (err) throw err;
+    });
+    
+    Project.findByIdAndUpdate(review.projId, { $push: { "rating.aggRating.reviewer": {"username": review.reviewer, "rated": review.ratingGiven}} }, {new:true}, (err, project) => {
+        if(err) throw err;
+        if(!project){
+            return res.json({"updated": false});
+        }
+        else{
+            return res.json({'updated': true});
+        }
+        
+    });
 
 });
 

@@ -22,6 +22,11 @@ export class ProjectComponent implements OnInit {
   newComment = [];
   enabledComments = [];
   loadingProject = false;
+  currentRate;
+  reviewer: any = {
+    'totalRating': 0,
+    'totalReviews': 0
+  };
 
 
   constructor(    
@@ -103,6 +108,17 @@ export class ProjectComponent implements OnInit {
       this.project = proj.project;
       var tempUrl = "https://www.youtube.com/embed/" + this.project.demoId;
       this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(tempUrl);
+      var reviewer = proj.project.rating.aggRating.reviewer;
+        for (var i in reviewer){
+          this.reviewer.totalReviews += 1;
+          this.reviewer.totalRating += reviewer[i].rated
+        }
+        if(this.reviewer.totalRating == 0 ||  this.reviewer.totalReviews == 0){
+          this.currentRate = 0;
+        }
+        else{
+          this.currentRate = this.reviewer.totalRating / this.reviewer.totalReviews;;
+        }
     },
     err => {
       return false;
@@ -135,6 +151,26 @@ export class ProjectComponent implements OnInit {
   collapse(id) {
     const index = this.enabledComments.indexOf(id); // Get position of id in array
     this.enabledComments.splice(index, 1); // Remove id from array
+  }
+
+  checkUser(){
+    if (this.username == this.authService.getCurrentUser()){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  onRateChange($event){
+    this.authService.postRating(this.project._id, $event, this.authService.getCurrentUser()).subscribe(response => {
+      if(response.updated){
+        this.flashMessage.show('Thanks for rating', {cssClass: 'alert-success', timeout:3000});
+      }
+      else{
+        this.flashMessage.show('Something went wrong', {cssClass: 'alert-success', timeout:3000});
+      }
+    });
   }
 
   ngOnInit(): void {
