@@ -127,11 +127,12 @@ export class ProjectComponent implements OnInit {
 
   // Function to post a new comment
   postComment(id) {
+    console.log(this.authService.getCurrentUserId());
     this.disableCommentForm(); // Disable form while saving comment to database
     this.processing = true; // Lock buttons while saving comment to database
     const comment = this.commentForm.get('comment').value; // Get the comment value to pass to service function
     // Function to save the comment to the database
-    this.authService.postComment(this.project._id, this.project._author, comment).subscribe(data => {
+    this.authService.postComment(this.project._id, this.authService.getCurrentUserId(), comment).subscribe(data => {
       this.getProject(); // Refresh all Project to reflect the new comment
       const index = this.newComment.indexOf(id); // Get the index of the project id to remove from array
       this.newComment.splice(index, 1); // Remove id from the array
@@ -146,7 +147,7 @@ export class ProjectComponent implements OnInit {
   deleteComment(i){
     var commentData = this.project.comments[i];
     if(commentData.commentator != this.authService.getCurrentUser() && this.authService.getCurrentUser() != this.username){
-      this.flashMessage.show("You don't have permission to delete this comment", {cssClass: 'alert-success', timeout:3000});
+      this.flashMessage.show("You don't have permission to delete this comment", {cssClass: 'alert-danger', timeout:3000});
     }
     else{
       var deleteComment = {

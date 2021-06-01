@@ -126,6 +126,10 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user')).username;    
   }
 
+  getCurrentUserId(){
+    return JSON.parse(localStorage.getItem('user')).id;    
+  }
+
   search(word){
     if (word === '') {
       return of([]);
