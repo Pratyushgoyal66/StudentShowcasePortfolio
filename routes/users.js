@@ -296,15 +296,15 @@ router.post('/rating', passport.authenticate('jwt', {session:false}), (req, res)
 
 });
 
-// //Get Ratings
-// router.get('/rating/:projId', (req, res) => {
-//     var projId = req.params.projId;
-//     Project.findById(projId, (err, project) => {
-//         if (err) throw err;
-//         else {
-//             res.json(project);
-//         }
-//     } )
-// });
+//delete comment
+router.delete('/comment', passport.authenticate('jwt', {session:false}), (req, res) => {
+    var deleteComment = req.body.commentMeta;
+    Project.findByIdAndUpdate(deleteComment.projId, {$pull : { 'comments': { 'comment': deleteComment.comment, 'commentator': deleteComment.commentator}}  }, (err, docs) => {
+        if (err) throw err;
+        else{
+            res.json({'deleted': true});
+        }
+    });
+});
 
 module.exports = router;

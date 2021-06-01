@@ -61,7 +61,8 @@
   
           <!-- Comment -->
           <div *ngIf="enabledComments.indexOf(project._id) > -1">
-            <li *ngFor="let comment of project.comments" class="list-group-item">
+            <li *ngFor="let comment of project.comments; let i = index" class="list-group-item">
+              <button style = "color: red; background-color: transparent; border: 0px;" (click)="deleteComment(i)">x</button>
               <strong>{{ comment.commentator }}:</strong> {{ comment.comment }}
             </li>
           </div>

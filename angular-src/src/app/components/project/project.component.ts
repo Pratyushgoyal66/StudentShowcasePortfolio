@@ -142,9 +142,34 @@ export class ProjectComponent implements OnInit {
     });
   }
 
+  //Delete Comment
+  deleteComment(i){
+    var commentData = this.project.comments[i];
+    if(commentData.commentator != this.authService.getCurrentUser() && this.authService.getCurrentUser() != this.username){
+      this.flashMessage.show("You don't have permission to delete this comment", {cssClass: 'alert-success', timeout:3000});
+    }
+    else{
+      var deleteComment = {
+        commentMeta: {
+          'projId': this.project._id,
+          'comment': commentData.comment,
+          'commentator': commentData.commentator
+        }
+      }
+      this.authService.deleteComment(deleteComment).subscribe(deleted => {
+        if(deleted){
+          this.project.comments.splice(i, 1);
+        }
+        else{
+          this.flashMessage.show('Something went wrong', {cssClass: 'alert-success', timeout:3000});
+        }
+      });
+    }
+  }
+
   // Expand the list of comments
   expand(id) {
-    this.enabledComments.push(id); // Add the current blog post id to array
+    this.enabledComments.push(id); // Add the current id to array
   }
 
   // Collapse the list of comments

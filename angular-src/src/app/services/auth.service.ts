@@ -155,6 +155,19 @@ export class AuthService {
 
   }
 
+  deleteComment(comment){
+    this.loadToken();
+    this.projurl = 'http://localhost:5000/users';
+    const httpOptions = {
+      headers: new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json'}), body: comment
+  };
+
+    return this.http.delete(
+      `${this.projurl}/comment`,
+      httpOptions
+    ).pipe(map(res => res));
+  }
+
   postRating(projId, ratingGiven, reviewer){
     var review = {
       'review': {
