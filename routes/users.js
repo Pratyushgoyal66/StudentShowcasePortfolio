@@ -198,16 +198,16 @@ router.delete('/:username/project/:title/delete', passport.authenticate('jwt', {
 });
 
 //Search
-router.post('/search', (req, res, next) => {
+router.get('/search/:query', (req, res, next) => {
     var query = {};
 
-    query.username = new RegExp(req.body.username, 'i');
+    query.username = new RegExp(req.params.query, 'i');
 
     User.find(query, (err, docs) => {
         if(err){return res.status(400).send({msg:"error occurred"});}
         if (!docs.length){
             var newQuery = {};
-            newQuery.title = new RegExp(req.body.username, 'i');
+            newQuery.title = new RegExp(req.params.query, 'i');
             Project.find(newQuery, (err, projects) => {
                 if(err){return res.status(400).send({msg:"error occurred"});}
                 return res.status(200).send(projects);
@@ -273,6 +273,38 @@ router.post('/comment', passport.authenticate('jwt', {session:false}), (req, res
             });
         }
     }
+});
+
+//Post new Rating
+router.post('/rating', passport.authenticate('jwt', {session:false}), (req, res) => {
+    var review = req.body.review;
+
+    Project.findByIdAndUpdate(review.projId, { $pull : {'rating.aggRating.reviewer': {'username': review.reviewer, 'rated': { $gte: 0 }} }}, (err, docs) => {
+        if (err) throw err;
+    });
+    
+    Project.findByIdAndUpdate(review.projId, { $push: { "rating.aggRating.reviewer": {"username": review.reviewer, "rated": review.ratingGiven}} }, {new:true}, (err, project) => {
+        if(err) throw err;
+        if(!project){
+            return res.json({"updated": false});
+        }
+        else{
+            return res.json({'updated': true});
+        }
+        
+    });
+
+});
+
+//delete comment
+router.delete('/comment', passport.authenticate('jwt', {session:false}), (req, res) => {
+    var deleteComment = req.body.commentMeta;
+    Project.findByIdAndUpdate(deleteComment.projId, {$pull : { 'comments': { 'comment': deleteComment.comment, 'commentator': deleteComment.commentator}}  }, (err, docs) => {
+        if (err) throw err;
+        else{
+            res.json({'deleted': true});
+        }
+    });
 });
 
 module.exports = router;

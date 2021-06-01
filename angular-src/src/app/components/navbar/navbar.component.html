@@ -4,12 +4,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
       <ng-template #rt let-r="result" let-t="term">
-        <div *ngIf = 'r.username; then userSearch else projSearch'></div>  
-        <ng-template #userSearch [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"><a class="nav-link" style="color:black" [routerLink] = "[r.username]">{{r.username}}</a></ng-template>
-        <ng-template #projSearch [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"><a class="nav-link" style="color:black" [routerLink] = "[r.authorUsername, 'project', r.title]">{{r.title}} </a></ng-template>
+        <div *ngIf = 'r.username'[routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"><a class="nav-link" style="color:black" [routerLink] = "[r.username]">{{r.username}}</a></div>  
+        <div *ngIf = 'r.title' [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"><a class="nav-link" style="color:black" [routerLink] = "[r.authorUsername, 'project', r.title]">{{r.title}} </a></div>
       </ng-template>
 
-      <input id="typeahead-http" type="text" class="form-control mx-sm-3" [class.is-invalid]="searchFailed" #input [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" [resultFormatter]="formatter" (selectItem)="onSelect($event, input)"/>
+      <input id="typeahead-http" type="text" class="form-control mx-sm-3" [class.is-invalid]="searchFailed" #input (focusout)="onSelect($event, input)" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter" [resultFormatter]="formatter" (selectItem)="onSelect($event, input)"/>
       <small *ngIf="searching" class="form-text text-muted">searching...</small>
       <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
       

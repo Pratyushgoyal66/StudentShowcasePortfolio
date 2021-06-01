@@ -22,6 +22,11 @@ export class ProjectComponent implements OnInit {
   newComment = [];
   enabledComments = [];
   loadingProject = false;
+  currentRate;
+  reviewer: any = {
+    'totalRating': 0,
+    'totalReviews': 0
+  };
 
 
   constructor(    
@@ -103,6 +108,17 @@ export class ProjectComponent implements OnInit {
       this.project = proj.project;
       var tempUrl = "https://www.youtube.com/embed/" + this.project.demoId;
       this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(tempUrl);
+      var reviewer = proj.project.rating.aggRating.reviewer;
+        for (var i in reviewer){
+          this.reviewer.totalReviews += 1;
+          this.reviewer.totalRating += reviewer[i].rated
+        }
+        if(this.reviewer.totalRating == 0 ||  this.reviewer.totalReviews == 0){
+          this.currentRate = 0;
+        }
+        else{
+          this.currentRate = this.reviewer.totalRating / this.reviewer.totalReviews;;
+        }
     },
     err => {
       return false;
@@ -111,11 +127,12 @@ export class ProjectComponent implements OnInit {
 
   // Function to post a new comment
   postComment(id) {
+    console.log(this.authService.getCurrentUserId());
     this.disableCommentForm(); // Disable form while saving comment to database
     this.processing = true; // Lock buttons while saving comment to database
     const comment = this.commentForm.get('comment').value; // Get the comment value to pass to service function
     // Function to save the comment to the database
-    this.authService.postComment(this.project._id, this.project._author, comment).subscribe(data => {
+    this.authService.postComment(this.project._id, this.authService.getCurrentUserId(), comment).subscribe(data => {
       this.getProject(); // Refresh all Project to reflect the new comment
       const index = this.newComment.indexOf(id); // Get the index of the project id to remove from array
       this.newComment.splice(index, 1); // Remove id from the array
@@ -126,15 +143,60 @@ export class ProjectComponent implements OnInit {
     });
   }
 
+  //Delete Comment
+  deleteComment(i){
+    var commentData = this.project.comments[i];
+    if(commentData.commentator != this.authService.getCurrentUser() && this.authService.getCurrentUser() != this.username){
+      this.flashMessage.show("You don't have permission to delete this comment", {cssClass: 'alert-danger', timeout:3000});
+    }
+    else{
+      var deleteComment = {
+        commentMeta: {
+          'projId': this.project._id,
+          'comment': commentData.comment,
+          'commentator': commentData.commentator
+        }
+      }
+      this.authService.deleteComment(deleteComment).subscribe(deleted => {
+        if(deleted){
+          this.project.comments.splice(i, 1);
+        }
+        else{
+          this.flashMessage.show('Something went wrong', {cssClass: 'alert-success', timeout:3000});
+        }
+      });
+    }
+  }
+
   // Expand the list of comments
   expand(id) {
-    this.enabledComments.push(id); // Add the current blog post id to array
+    this.enabledComments.push(id); // Add the current id to array
   }
 
   // Collapse the list of comments
   collapse(id) {
     const index = this.enabledComments.indexOf(id); // Get position of id in array
     this.enabledComments.splice(index, 1); // Remove id from array
+  }
+
+  checkUser(){
+    if (this.username == this.authService.getCurrentUser()){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  onRateChange($event){
+    this.authService.postRating(this.project._id, $event, this.authService.getCurrentUser()).subscribe(response => {
+      if(response.updated){
+        this.flashMessage.show('Thanks for rating', {cssClass: 'alert-success', timeout:3000});
+      }
+      else{
+        this.flashMessage.show('Something went wrong', {cssClass: 'alert-success', timeout:3000});
+      }
+    });
   }
 
   ngOnInit(): void {

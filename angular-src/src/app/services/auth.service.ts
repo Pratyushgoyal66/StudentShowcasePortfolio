@@ -126,6 +126,10 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user')).username;    
   }
 
+  getCurrentUserId(){
+    return JSON.parse(localStorage.getItem('user')).id;    
+  }
+
   search(word){
     if (word === '') {
       return of([]);
@@ -133,9 +137,8 @@ export class AuthService {
     var searchReq = {"username": word};
     this.projurl = 'http://localhost:5000/users';
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.post<any>(
-      `${this.projurl}/search`,
-      searchReq,
+    return this.http.get<any>(
+      `${this.projurl}/search/${word}`,
       {headers: headers}
     ).pipe(map(res => res));
   }
@@ -154,6 +157,36 @@ export class AuthService {
       {headers: headers}
     ).pipe(map(res => res));
 
+  }
+
+  deleteComment(comment){
+    this.loadToken();
+    this.projurl = 'http://localhost:5000/users';
+    const httpOptions = {
+      headers: new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json'}), body: comment
+  };
+
+    return this.http.delete(
+      `${this.projurl}/comment`,
+      httpOptions
+    ).pipe(map(res => res));
+  }
+
+  postRating(projId, ratingGiven, reviewer){
+    var review = {
+      'review': {
+        'projId': projId,
+        'ratingGiven': ratingGiven,
+        'reviewer': reviewer
+      }
+    };
+    this.projurl = 'http://localhost:5000/users';
+    let headers = new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json'});
+    return this.http.post<any>(
+      `${this.projurl}/rating`,
+      review,
+      {headers: headers}
+    ).pipe(map(res => res));
   }
 
   loadToken(){

@@ -85,10 +85,19 @@ const ProjectSchema = mongoose.Schema({
     }],
     rating: {
         aggRating: {
-            type: Number
+                reviewer: [{                   
+                    username: {
+                        type:String,
+                        default: ''
+                    },
+                    rated: {
+                        type:Number,
+                        default: 0
+                    }
+                }]
         },
         teachRating: {
-            type: Number
+            type:Number
         },
         githubStars: {
             type: Number
