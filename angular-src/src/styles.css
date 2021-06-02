@@ -1,11 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    background-color : #7395AE;
-    color: white;
+    background-color : white;
+    color: black;
     font-family: 'Roboto Mono';
 }
 
 .jumbotron {
     border-color: #5D5C61;
     box-shadow: 3px 3px #5D5C61;
+}
+
+.bg-light {
+    background-color: #b6d7d4 !important;
+}
+
+.navbar-light .navbar-brand {
+    color: #000;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(0, 0, 0, 0.5);
 }

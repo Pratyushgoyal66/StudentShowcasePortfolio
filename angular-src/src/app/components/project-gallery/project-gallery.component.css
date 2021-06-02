@@ -1,14 +1,17 @@
 
-.jumbotron {
-    border-radius: 1em;
-    background-color: #B0A295;
-    color: white;
-}
-
 h1, h3 {
     font-family: 'Quicksand';
+    font-weight: 500;
+    color: black;
 }
 
-strong {
-    font-size: 3.3rem;
+.smallContainer {
+    color: black !important;
+    margin-top: 5%;
+    background-color: white;
+    border-style: double;
+    border-color: #b6d7d4;
+    margin-bottom: 5%;    
+    border-radius: 20px;
+    text-align: center;
 }

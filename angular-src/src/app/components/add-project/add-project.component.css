@@ -3,12 +3,6 @@ h1, h3 {
     font-weight: 800;
 }
 
-.jumbotron {
-    border-radius: 1em;
-    background-color: #B0A295;
-    color: white;
-}
-
 .resize {
     size: 15rem;
     height: 15rem;
@@ -23,18 +17,18 @@ h1, h3 {
 }
 
 .submitForm {
-    background-color: #5D5C61;
-    border-color: #5D5C61;
-    box-shadow: 2px 2px #B0A295;
+    background-color: #72DFD4;
+    border-color: #72DFD4;
+    box-shadow: 2px 2px #72DFD4;
     margin:0 auto;
     color: white;
     display:block;
 }
 
 .submitForm:hover {
-    background-color: #B0A295;
-    border-color: #5D5C61;
-    box-shadow: 1px 1px #5D5C61;
+    background-color: #72DFD4;
+    border-color: black;
+    box-shadow: 1px 1px black;
 }   
 
 input, textarea {
@@ -47,4 +41,27 @@ label {
 
 .resizeSmall {
     width: 15rem;
+}
+
+
+.container {
+    padding: 1% 1%;
+    border-radius: 1em;
+    border-color: #b6d7d4;
+    margin-top: 2%;
+    border-style: dotted;
+}
+
+.smallContainer {
+    color: black;
+    background-color: white;
+    border-style: double;
+    border-color: #b6d7d4;
+    margin-top: 2%;
+    border-radius: 20px;
+    margin-bottom: 2%;
+}
+
+.display-5 {
+    text-align: center;
 }

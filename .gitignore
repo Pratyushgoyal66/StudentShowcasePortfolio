@@ -1,1 +1,10 @@
-githubToken.txt
+node_modules
+package-lock.json
+package.json
+angular-src/node_modules
+config
+index.js
+models
+public
+routes
+README.md

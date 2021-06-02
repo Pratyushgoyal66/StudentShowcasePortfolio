@@ -1,9 +1,8 @@
-<div class="jumbotron jumbotron-fluid " style="margin-top: 70px;">
-  <div class="container">
-      <h1 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a style="color:white;"
-          [routerLink]="['/', username, 'projectGallery']"><strong>P</strong>ROJECT <strong>G</strong>ALLERY</a></h1>
-  </div>
+<div class="smallContainer">
+  <h1 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a style="color:black;"
+      [routerLink]="['/', username, 'projectGallery']">PROJECT GALLERY</a></h1>
 </div>
+
 <div *ngFor="let project of projectGal">
   <div class="d-flex justify-content-between" style="float:left">
     <!-- Card -->
@@ -12,7 +11,7 @@
       class="card-image mb-3 mx-2">
       <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
         <div>
-          <h3 class="card-title pt-2">{{project.title}}</h3>
+          <h3 class="card-title pt-2" style="color:white">{{project.title}}</h3>
           <p>
             {{project.body.shortDescription}}
           </p>
