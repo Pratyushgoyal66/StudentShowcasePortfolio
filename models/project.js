@@ -103,11 +103,9 @@ const ProjectSchema = mongoose.Schema({
             type: Number
         }
     },
-    /*
-    tags: {
+    tags: [{
         type: String
-    },    
-    */
+    }],    
 });
 
 const Project = mongoose.model('Project', ProjectSchema);
