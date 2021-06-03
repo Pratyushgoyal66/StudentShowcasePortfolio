@@ -22,6 +22,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdvancedSearchComponent } from './components/advanced-search/advanced-search.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 const appRoutes: Routes = [
   {path : '', component: HomeComponent},
@@ -31,6 +33,7 @@ const appRoutes: Routes = [
   {path : ':username/project/:title', component: ProjectComponent},
   {path : ':username/addProject', component: AddProjectComponent, canActivate: [AuthGuardLoggedOut]},
   {path : ':username/projectGallery', component: ProjectGalleryComponent},
+  {path : ':advanced/search', component: AdvancedSearchComponent},
 
 ];
 
@@ -47,6 +50,7 @@ const appRoutes: Routes = [
     ProjectGalleryComponent,
     AddProjectComponent,
     AddProjectComponent,
+    AdvancedSearchComponent,
     
 
   ],
@@ -61,7 +65,8 @@ const appRoutes: Routes = [
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     IonicStorageModule.forRoot(),
-    NgbModule
+    NgbModule,
+    NgSelectModule
   ],
   providers: [ValidateService, AuthService, AuthGuardLoggedOut, AuthGuardLoggedIn],
   bootstrap: [AppComponent]
