@@ -4,16 +4,14 @@
           [routerLink]="['/', username, 'projectGallery']"><strong>P</strong>ROJECT <strong>G</strong>ALLERY</a></h1>
   </div>
 </div>
-<div *ngFor="let project of projectGal">
-  <div class="d-flex justify-content-between" style="float:left">
-    <!-- Card -->
-    <mdb-card
-      style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg')"
-      class="card-image mb-3 mx-2">
-      <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-        <div>
-          <h3 class="card-title pt-2">{{project.title}}</h3>
-          <p>
+<div class="card-group">
+  <div *ngFor="let project of projectGal">
+    <div class="card">
+      <div class="card border border-primary shadow-0 " style="height: 18rem; max-width: 18rem;">
+        <div class="card-header">Project</div>
+        <div class="card-body text-primary">
+          <h5 class="card-title">{{project.title}}</h5>
+          <p class="card-text">
             {{project.body.shortDescription}}
           </p>
           <div [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
@@ -25,8 +23,6 @@
           </div>
         </div>
       </div>
-      <!-- Content -->
-    </mdb-card>
-    <!-- Card -->
+    </div>
   </div>
 </div>
