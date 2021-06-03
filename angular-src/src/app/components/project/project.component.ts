@@ -194,7 +194,7 @@ export class ProjectComponent implements OnInit {
         this.flashMessage.show('Thanks for rating', {cssClass: 'alert-success', timeout:3000});
       }
       else{
-        this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout:3000});
+        this.flashMessage.show('Something went wrong', {cssClass: 'alert-success', timeout:3000});
       }
     });
   }

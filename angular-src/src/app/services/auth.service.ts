@@ -143,15 +143,6 @@ export class AuthService {
     ).pipe(map(res => res));
   }
 
-  advancedSearch(){
-    this.projurl = 'http://localhost:5000/users';
-    let headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.http.get<any>(
-      `${this.projurl}/advanced/search/`,
-      {headers: headers}
-    ).pipe(map(res => res));
-  }
-
   postComment(projId, userId, comment){
     const commentData = {
       projId: projId,
