@@ -1,15 +1,16 @@
 .btn {
-    background-color: #5D5C61;
-    border-color: #5D5C61;
-    box-shadow: 2px 2px #B0A295;
+    background-color: #72DFD4;
+    border-color: #72DFD4;
+    box-shadow: 2px 2px #72DFD4;
     margin:0 auto;
+    color: white;
     display:block;
 }
 
 .btn:hover {
-    background-color: #B0A295;
-    border-color: #5D5C61;
-    box-shadow: 1px 1px #5D5C61;
+    background-color: #72DFD4;
+    border-color: black;
+    box-shadow: 1px 1px black;
 }   
 
 h1 {
@@ -17,12 +18,28 @@ h1 {
     font-weight: 800;
 }
 
-.jumbotron {
-    border-radius: 1em;
-    background-color: #B0A295;
-    color: white;
+input {
+    background-color: #FFFAFA;
+    max-width: 500px;
 }
 
-input {
-    background-color: #FAEFE5;
+.display-5 {
+    text-align: center;
+}
+
+.container {
+    width: 45%;
+    margin-top: 17%;
+    background-color: #F6F8FA;
+    border-radius: 15px;
+    padding: 5px;
+    height: 25rem;
+}
+
+.smallContainer {
+    width: 85%;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
 }
