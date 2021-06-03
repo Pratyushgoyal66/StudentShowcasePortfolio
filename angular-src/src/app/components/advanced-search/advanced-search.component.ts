@@ -14,6 +14,10 @@ export class AdvancedSearchComponent implements OnInit {
   projectsArray;
   displayProjects;
   projects = new Array();
+  tags = new Array();
+  selectedTags;
+  filtered = false;
+  currentRating;
 
 
 
@@ -62,15 +66,53 @@ constructor(
       }
       var project = {
         'title': this.projectsArray[i].title,
-        'rating' : total
+        'author': this.projectsArray[i].author,
+        'authorUsername': this.projectsArray[i].authorUsername,
+        'rating' : total,
+        'tags': this.projectsArray[i].tags.toString(),
+        'searchingTags': this.projectsArray[i].tags
+      }
+      for(var z in this.projectsArray[i].tags){
+        if(!this.tags.includes(this.projectsArray[i].tags[z])){
+          this.tags.push(this.projectsArray[i].tags[z]);
+        }
       }
       this.projects.push(project);
     }
   }
 
   filter(rating){
+    if(this.currentRating != rating){
+      this.displayProjects = this.projects.filter(proj => proj.rating == rating);
+      this.currentRating = rating;
+    }
+    else{
+      this.currentRating = rating;
+      this.displayProjects = this.displayProjects.filter(proj => proj.rating == rating);
+      this.filtered = true;
+    }
+  }
 
-    this.displayProjects = this.projects.filter(proj => proj.rating == rating);
+  select(){
+    if (!this.selectedTags.length){
+      if(!this.filtered){
+        this.reset();
+      }
+      else{
+        this.displayProjects = this.projects.filter(proj => proj.rating == this.currentRating);
+      }
+    }
+    else{
+      for(var i in this.selectedTags){
+        this.displayProjects = this.displayProjects.filter(proj => proj.searchingTags.includes(this.selectedTags[i]));
+      }
+    }
+  }
+
+  reset(){
+    this.selectedTags = [];
+    this.displayProjects = this.projects.slice(0);
+    this.filtered = false;
   }
 
 }

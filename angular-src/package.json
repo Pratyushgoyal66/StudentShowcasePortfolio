@@ -26,6 +26,7 @@
     "@ionic/storage": "^3.0.2",
     "@ionic/storage-angular": "^3.0.2",
     "@ng-bootstrap/ng-bootstrap": "^9.1.1",
+    "@ng-select/ng-select": "^6.1.0",
     "@types/chart.js": "^2.7.40",
     "angular-bootstrap-md": "^11.0.0",
     "angular2-flash-messages": "^3.0.1",

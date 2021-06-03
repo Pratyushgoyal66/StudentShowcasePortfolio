@@ -21,6 +21,7 @@
             <li *ngIf = "authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink]= "[authService.getCurrentUser(), 'projectGallery']">Project Gallery</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink] = "['/advanced/search']">Advanced Search </a></li>
             <li *ngIf = "!authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink] = "['/login']">Login </a></li>
             <li *ngIf = "!authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink] = "['/register']">Register </a></li>
             <li *ngIf = "authService.loggedIn()" class="nav-item" [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}" ><a class="nav-link" [routerLink]= "[authService.getCurrentUser(), 'addProject']">Add Project</a></li>

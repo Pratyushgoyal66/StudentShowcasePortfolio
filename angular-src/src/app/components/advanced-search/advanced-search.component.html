@@ -1,12 +1,23 @@
 <h1>Search Projects by Rating</h1>
-<div *ngFor="let project of displayProjects">
-  {{project.title}} - {{project.rating}}
+<ng-select [multiple]="true" [(ngModel)]="selectedTags" (change)="select()" >
+  <ng-option *ngFor="let tag of tags" [value]="tag" >{{tag}}</ng-option>
+</ng-select>
+<div  *ngFor="let project of displayProjects">
+  <ul style = "border: 1px solid blue;">
+    <li [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"><a class="nav-link" style="color:black" [routerLink] = "['../../', project.authorUsername, 'project', project.title ]">Title: {{project.title}}</a></li>
+    <li [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"><a class="nav-link" style="color:black" [routerLink] = "['../../', project.authorUsername]">Author: {{project.author}}</a></li>
+    <li>Rating: {{project.rating}}</li>
+    <li>Tags: {{project.tags}}</li>
+  </ul>
+  <hr>
 </div>
 <div>&nbsp;</div>
 <div class="btn-group btn-group-lg">
+<button class="btn btn-primary" (click)="filter(0)">Not Rated</button>
 <button class="btn btn-primary" (click)="filter(1)">1</button>
 <button class="btn btn-primary" (click)="filter(2)">2</button>
 <button class="btn btn-primary" (click)="filter(3)">3</button>
 <button class="btn btn-primary" (click)="filter(4)">4</button>
 <button class="btn btn-primary" (click)="filter(5)">5</button>
+<button class="btn btn-primary" (click)="reset()">Reset Choices</button>
 </div>
