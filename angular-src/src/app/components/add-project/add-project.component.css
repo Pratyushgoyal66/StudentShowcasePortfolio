@@ -32,7 +32,7 @@ h1, h3 {
 }   
 
 input, textarea {
-    background-color: #FAEFE5;
+    background-color: white;
 }
 
 label {
@@ -49,17 +49,19 @@ label {
     border-radius: 1em;
     border-color: #b6d7d4;
     margin-top: 2%;
+    background-color: #FFFAFA;
     border-style: dotted;
 }
 
 .smallContainer {
     color: black;
-    background-color: white;
+    /* background-color: #FFFAFA; */
     border-style: double;
     border-color: #b6d7d4;
     margin-top: 2%;
     border-radius: 20px;
     margin-bottom: 2%;
+    background-image: linear-gradient(45deg, #FFFAFA, #b6d7d4);
 }
 
 .display-5 {

@@ -3,29 +3,32 @@
       [routerLink]="['/', username, 'projectGallery']">PROJECT GALLERY</a></h1>
 </div>
 
-<div *ngFor="let project of projectGal">
-  <div class="d-flex justify-content-between" style="float:left">
-    <!-- Card -->
-    <mdb-card
-      style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg')"
-      class="card-image mb-3 mx-2">
-      <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
-        <div>
-          <h3 class="card-title pt-2" style="color:white">{{project.title}}</h3>
-          <p>
-            {{project.body.shortDescription}}
-          </p>
-          <div [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-            <a mdbBtn color="pink" class="waves-light" mdbWavesEffect
-              [routerLink]="['/', username, 'project', project.title]">
-              <mdb-icon far icon="clone" class="left"></mdb-icon>
-              View project
-            </a>
+<div class="card-group">
+  <div *ngFor="let project of projectGal;">
+    <div class="cardContainer">
+      <div class="card">
+        <div class="card border border-primary shadow-0 " style="height: 20rem; width: 16rem; max-width: 50ch; ">
+          <div class="card-header">Author: <strong>{{project.author}}</strong></div>
+          <div class="card-body text-dark">
+            <h5 class="card-title">
+              <i>
+                {{project.title}}
+              </i>
+            </h5>
+            <p class="card-text text-secondary">
+              {{project.body.shortDescription}}
+            </p>
+            <div class="shiftBottom">
+              <div [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+                <a mdbBtn class="waves-light" mdbWavesEffect [routerLink]="['/', username, 'project', project.title]">
+                  <mdb-icon far icon="clone" class="left"></mdb-icon>
+                  View project
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- Content -->
-    </mdb-card>
-    <!-- Card -->
+    </div>
   </div>
 </div>
