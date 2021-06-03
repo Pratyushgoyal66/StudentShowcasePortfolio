@@ -10,12 +10,3 @@
 li {
     padding-left: 15px;
 }
-
-.navbar-expand-lg .navbar-collapse {
-    position: absolute;
-    right: 0%;
-}
-
-#typeahead-http {
-    width: 20%;
-}
