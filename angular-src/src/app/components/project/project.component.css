@@ -21,6 +21,7 @@ ul {
     margin-top: 40px;
     margin-bottom: 40px;
 }
+
 .page-header {
     display: inline-block;
 }
@@ -41,4 +42,30 @@ ul {
     border-radius: 10px;
     border-style: dotted;
     border-color: #cfe5e3;
+}
+
+.textarea_comment {
+    margin-bottom: 40px;
+}
+
+.btn {
+    margin: 3px;
+}
+
+.btn {
+    margin: 3px 3px;
+    float: right;
+}
+
+.btn-light {
+    background-color: #FFFAFA !important;
+    border-color: #FFCCCB;
+    box-shadow: 2px 2px #FFCCCB;
+
+}
+
+.btn:hover {
+    background-color: #ff6c69 !important;
+    border-color: black;
+    box-shadow: 1px 1px black;
 }

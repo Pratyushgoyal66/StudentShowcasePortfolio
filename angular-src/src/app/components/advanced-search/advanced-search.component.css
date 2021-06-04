@@ -1,3 +1,78 @@
 ul {
     list-style-type: none;
 }
+
+/* .btn-primary {
+    background-color: white !important;
+    color: black !important;
+    border-color: white !important;
+    margin: 4px 4px !important;
+    box-shadow: 0px 0px 0px 0px !important;
+}
+
+.btn-primary:hover {
+    font-weight: bold;
+    box-shadow: 0px 0px 0px 0px !important;
+}
+
+.boldSelection:focus {
+    font-weight: bold !important;
+    color: #B9D9D6 !important;
+    font-size: 25px;
+    outline: 0px;
+} */
+
+
+h1 {
+    font-family: 'Quicksand';
+    font-weight: 800;
+}
+
+.smallContainer {
+    color: black;
+    border-style: double;
+    border-color: #b6d7d4;
+    margin-top: 2%;
+    border-radius: 20px;
+    margin-bottom: 2%;
+    background-image: linear-gradient(45deg, #FFFAFA, #b6d7d4);
+}
+
+.display-5 {
+    text-align: center;
+}
+
+.btn-group {
+    float: right;
+}
+
+.container {
+    max-width: 3000px;;
+}
+
+
+label {
+    margin: 10px;
+}
+
+.hideNR, .hide1, .hide2, .hide3, .hide4, .hide6, .hide5, .hideRC{
+    display: none;
+}
+
+.NR:hover ~ .hideNR, .RC:hover ~ .hideRC{
+    float: right;
+    display: block;
+    color: #8b0000;
+    font-weight: bold;
+}
+
+.one:hover ~ .hide1, .two:hover ~ .hide2, .three:hover ~ .hide3, .four:hover ~ .hide4, .five:hover ~ .hide5 {
+    float: right;
+    display: block;
+    color: #d4af37;
+    font-weight: bold;
+}
+
+input {
+    margin-right: 10px;
+}

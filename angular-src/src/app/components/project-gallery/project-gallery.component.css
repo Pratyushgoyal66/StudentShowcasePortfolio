@@ -1,20 +1,22 @@
 
-h1, h3 {
-    font-family: 'Quicksand';
-    font-weight: 500;
-    color: black;
-}
 
 .smallContainer {
     color: black !important;
-    margin-top: 5%;
+    margin-top: 2%;
     /* background-color: #FFFAFA; */
-    background-image: linear-gradient(45deg, #FFFAFA, #b6d7d4);
     border-style: double;
     border-color: #b6d7d4;
-    margin-bottom: 5%;    
     border-radius: 20px;
-    text-align: center;
+    margin-bottom: 2%;
+    background-image: linear-gradient(45deg, #FFFAFA, #b6d7d4);
+    text-align: center !important;
+}
+
+.display-5 {
+    font-family: 'Quicksand';
+    font-weight: 800;
+    color: black;
+    text-align: center !important;
 }
 
 .cardContainer {
@@ -35,6 +37,14 @@ h1, h3 {
     position: absolute;
     bottom: 30px;
     background-color: white;
+    border-color: #72DFD4;
+    box-shadow: 2px 2px #72DFD4;
+}
+
+.shiftBottom:hover {
+    background-color: #72DFD4;
+    border-color: black;
+    box-shadow: 1px 1px black;
 }
 
 .card-header {
