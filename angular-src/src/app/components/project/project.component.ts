@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-project',
@@ -197,6 +197,10 @@ export class ProjectComponent implements OnInit {
         this.flashMessage.show('Something went wrong', {cssClass: 'alert-danger', timeout:3000});
       }
     });
+  }
+
+  onUpdate(){
+    this.router.navigate([this.username, 'project', this.title, 'editProject']);
   }
 
   ngOnInit(): void {

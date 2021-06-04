@@ -8,6 +8,8 @@
     </ngb-rating>
     <button *ngIf='checkUser()' type=button class="btn btn-primary deletebutton" (click)="onDelete()">Delete
       Project</button>
+    <button *ngIf='checkUser()' type=button class="btn btn-primary" (click)="onUpdate()">Edit
+      Project</button>
   </div>
   <div>
     <iframe width="420" height="500" [src]='safeUrl' class="youtube"></iframe>

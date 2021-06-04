@@ -1,0 +1,70 @@
+<div class="bigContainer">
+
+    <div class = "smallContainer">
+        <h1 class="display-5">Update Project</h1>
+    </div>
+    <div class="container">
+        <form *ngIf="project | async; else loading" [formGroup]="projForm" (submit)="onSubmitEditProjectValues()">
+            <div formGroupName="body">
+                <div class="form-group">
+                    <h3>Details:</h3>
+                    <span class="left">
+                        <label>
+                            Short Description:
+                            <textarea formControlName="shortDescription" class="form-control resize"
+                                TextMode="MultiLine" maxlength="50" required>
+                                </textarea>
+                        </label>
+                    </span>
+                    <span class="right">
+                        <label>
+                            Description:
+                            <textarea formControlName="description" class="form-control resize" TextMode="MultiLine"
+                                required>
+                                </textarea>
+                        </label>
+                    </span>
+                    <div>
+                        <span class="left">
+                            <label>
+                                Worked With:
+                                <input type="text" formControlName="workedWith" class="form-control resizeSmall"
+                                    required>
+                            </label>
+                        </span>
+                        <span class="right">
+                            <label>
+                                Worked Under:
+                                <input type="text" formControlName="workedUnder" class="form-control resizeSmall">
+                            </label>
+                        </span>
+                    </div>
+                    <label>
+                        Inspiration:
+                    </label>
+                    <input type="text" formControlName="inspiration" class="form-control" required>
+                    <label>
+                        Challenges:
+                    </label>
+                    <input type="text" formControlName="challenges" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Repository:</label>
+                <input type="text" formControlName="repo" name="repo" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Id of Youtube Video (the part after v=):</label>
+                <input type="text" formControlName="demoId" name="demoId" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Tags (seperate individual tags by comma ):</label>
+                <input type="text" formControlName="tags" name="tags" class="form-control" required>
+            </div>
+            <input type="submit" class="btn btn-dard submitForm" value="SUBMIT">
+        </form>
+    </div>
+    <ng-template #loading>
+        Loading Project...
+    </ng-template>
+</div>

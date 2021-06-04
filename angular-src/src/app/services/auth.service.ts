@@ -57,6 +57,20 @@ export class AuthService {
     ).pipe(map(res => res));
   }
 
+  editProject(projId, updateFields, username, title){
+    this.loadToken();
+    var projBody = {
+      'projId': projId,
+      'updateFields': updateFields
+    }
+    let headers = new HttpHeaders({'Authorization':this.authToken, 'Content-Type': 'application/json'});
+    return this.http.post<any>(
+      `${this.projurl}/${username}/project/${title}/editProject`,
+      projBody,
+      {headers: headers}
+    ).pipe(map(res => res));
+  }
+
   authenticateUser(user){
     let headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post<any>(

@@ -44,6 +44,24 @@ router.get('/:username/project/:title', (req, res, next) => {
     });
 });
 
+
+//Edit Project
+router.post('/:username/project/:title/editProject', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    var projId = req.body.projId;
+    var updateFields = req.body.updateFields;
+    Project.findByIdAndUpdate(projId, updateFields, {new: true, runValidators: true}, (err, project) => {
+        if (err){
+            res.json({'updated': false, 'err': err});
+        }
+        else if (!project){
+            res.json({'updated': false});
+        } 
+        else{
+            res.json({'updated': true});
+        }
+    });
+});
+
 //Authenticate
 router.post('/authenticate', (req, res, next) =>{
     const username = req.body.username;
