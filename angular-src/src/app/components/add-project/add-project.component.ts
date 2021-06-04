@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
-import {Observable} from 'rxjs';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-add-project',
@@ -26,7 +24,8 @@ export class AddProjectComponent implements OnInit {
       challenges: new FormControl('') 
     }),
     repo : new FormControl(''),
-    demoId: new FormControl('') 
+    demoId: new FormControl('') ,
+    tags: new FormControl('')
   });
 
   constructor(
@@ -62,13 +61,14 @@ export class AddProjectComponent implements OnInit {
       },
       repo: String,
       demoId: String,
+      tags: Array,
     };
     project.author = rawProj.author;
     project.title = rawProj.title;
     project.body = rawProj.body;
     project.repo = rawProj.repo;
     project.demoId = rawProj.demoId;
-
+    project.tags = rawProj.tags.split(','); 
 
     //addProject
     this.authService.addProject(project).subscribe(data => {

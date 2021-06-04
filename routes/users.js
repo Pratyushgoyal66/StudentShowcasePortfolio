@@ -146,7 +146,8 @@ router.post('/:username/addProject',  passport.authenticate('jwt', {session:fals
                     title: req.body.title,
                     body: req.body.body,
                     demoId: req.body.demoId,
-                    repo: req.body.repo
+                    repo: req.body.repo,
+                    tags: req.body.tags
                 });
                 newProject.save((err, proj) => { 
                     if (err){
@@ -303,6 +304,19 @@ router.delete('/comment', passport.authenticate('jwt', {session:false}), (req, r
         if (err) throw err;
         else{
             res.json({'deleted': true});
+        }
+    });
+});
+
+//Advanced Search
+router.get('/advanced/search', (req, res) => {
+    Project.find({}, (err, projects) => {
+        if(err) throw err;
+        if(!projects.length){
+            return res.status(404).json({'data':false});
+        }
+        else{
+            return res.status(200).json({'data': true, 'projects': projects})
         }
     });
 });
