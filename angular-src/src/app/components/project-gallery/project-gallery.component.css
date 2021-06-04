@@ -1,14 +1,51 @@
 
-.jumbotron {
-    border-radius: 1em;
-    background-color: #B0A295;
-    color: white;
-}
-
 h1, h3 {
     font-family: 'Quicksand';
+    font-weight: 500;
+    color: black;
 }
 
-strong {
-    font-size: 3.3rem;
+.smallContainer {
+    color: black !important;
+    margin-top: 5%;
+    /* background-color: #FFFAFA; */
+    background-image: linear-gradient(45deg, #FFFAFA, #b6d7d4);
+    border-style: double;
+    border-color: #b6d7d4;
+    margin-bottom: 5%;    
+    border-radius: 20px;
+    text-align: center;
+}
+
+.cardContainer {
+    padding: 9px 9px;
+}
+
+.card-body {
+    background-color: #FFFAFA !important;
+    /* background-image: linear-gradient(135deg, #F2F0F0, #e5f7f5) !important; */
+}
+
+.card {
+    border-color: #B6D7D4 !important;
+    border-style: dashed;
+}
+
+.shiftBottom {
+    position: absolute;
+    bottom: 30px;
+    background-color: white;
+}
+
+.card-header {
+    /* background-color: white; */
+    background-image: linear-gradient(45deg, #FFFAFA, #b6d7d4);
+}
+
+a {
+    margin : 0px 0px !important;
+}
+
+i {
+    font-weight: 600;
 }

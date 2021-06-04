@@ -1,87 +1,95 @@
 <div *ngIf="project">
-    <div class="pb-4 mt-5 mb-2 border-bottom">
-        <h2 class="page-header"> {{project.title}}</h2>
-        <ngb-rating style = "padding-left: 133px;" [(rate)]="currentRate" [max]="5" (rateChange)="onRateChange($event)">
-          <ng-template let-fill="fill" let-index="index">
-            <span class="star" [class.filled]="fill === 100">&#9733;</span>
-          </ng-template>
-        </ngb-rating>
-        <button *ngIf = 'checkUser()' type=button class="btn btn-primary deletebutton"  (click)="onDelete()">Delete Project</button>
-    </div>
-    <div>        
-        <iframe width="420" height="315" [src]='safeUrl' class = "youtube"></iframe>
-    </div>
+  <div class="pb-4 mt-5 mb-2 border-bottom">
+    <h2 class="page-header"> {{project.title}}</h2>
+    <ngb-rating style="padding-left: 133px;" [(rate)]="currentRate" [max]="5" (rateChange)="onRateChange($event)">
+      <ng-template let-fill="fill" let-index="index">
+        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+      </ng-template>
+    </ngb-rating>
+    <button *ngIf='checkUser()' type=button class="btn btn-primary deletebutton" (click)="onDelete()">Delete
+      Project</button>
+  </div>
+  <div>
+    <iframe width="420" height="500" [src]='safeUrl' class="youtube"></iframe>
+  </div>
 
-    <ul class="list-group">
-        <li class="list-group-item"><strong>Author</strong>: {{project.author}}</li>
-        <li class="list-group-item"><strong>Description</strong>: {{project.body.description}}</li>
-        <li *ngIf = "project.body.workedWith" class="list-group-item"><strong>Worked With</strong>: {{project.body.workedWith}}</li>
-        <li *ngIf = "project.body.workedUnder" class="list-group-item"><strong>Worked Under</strong>: {{project.body.workedUnder}}</li>
-        <li *ngIf = "project.body.inspiration" class="list-group-item"><strong>Inspiration</strong>: {{project.body.inspiration}}</li>
-        <li *ngIf = "project.body.challenges" class="list-group-item"><strong>Challenges</strong>: {{project.body.challenges}}</li>
-        <li class="list-group-item"><strong>Repository</strong>: <a href={{project.repo}}
-                style="color:white;">{{project.title}}</a></li>    
-        <li class="list-group-item"><strong>Tags</strong>: {{project.tags}}</li>
-    </ul>
+  <ul class="list-group container">
+    <li class="list-group-item smallContainer"><strong>Description</strong>: {{project.body.description}}</li>
+    <li class="list-group-item smallContainer"><strong>Author</strong>: {{project.author}}</li>
+    <li *ngIf="project.body.workedWith" class="list-group-item smallContainer"><strong>Worked With</strong>:
+      {{project.body.workedWith}}</li>
+    <li *ngIf="project.body.workedUnder" class="list-group-item smallContainer"><strong>Worked Under</strong>:
+      {{project.body.workedUnder}}</li>
+    <li *ngIf="project.body.inspiration" class="list-group-item smallContainer"><strong>Inspiration</strong>:
+      {{project.body.inspiration}}</li>
+    <li *ngIf="project.body.challenges" class="list-group-item smallContainer"><strong>Challenges</strong>: {{project.body.challenges}}
+    </li>
+    <li class="list-group-item smallContainer"><strong>Repository</strong>: <a href={{project.repo}}
+        style="color:black;">{{project.title}}</a></li>
+    <li class="list-group-item"><strong>Tags</strong>: {{project.tags}}</li>
+  </ul>
 
-    <!-- Post Comment Box: Start -->
-    <ul class="list-group">
-        <li class="list-group-item">
-          <!-- Post Comment Button -->
-          <button style = "float: left;" type="button" name="button" class="btn btn-sm btn-danger" (click)="draftComment(project._id)" [disabled]="newComment.indexOf(project._id) > -1">Post Comment</button>
-          <!-- Show Comments -->
-          <button style = "float: left;" class="btn btn-sm btn-info" *ngIf="enabledComments.indexOf(project._id) === -1 && project.comments.length > 0">
-            <span (click)="expand(project._id)">
-              Show Comments
-              <div class="glyphicon glyphicon-comment"></div>
-            </span>
-          </button>
-          <br />
-          <br />
-          <div *ngIf="newComment.indexOf(project._id) > -1">
-  
-            <!-- Form: Comment Form Start -->
-            <form [formGroup]="commentForm">
-              <!-- Textarea Input -->
-              <textarea name="comment" rows="10" cols="30" class="form-control" formControlName="comment"></textarea>
-              <!-- Validation -->
-              <div [ngClass]="{'has-success': !commentForm.controls.comment.errors && commentForm.controls.comment.dirty, 'has-error': commentForm.controls.comment.dirty && commentForm.controls.comment.errors}">
-                <ul class="help-block">
-                  <li *ngIf="commentForm.controls.comment.errors?.required && commentForm.controls.comment.dirty">This field is required.</li>
-                  <li *ngIf="(commentForm.controls.comment.errors?.maxlength && commentForm.controls.comment.dirty) ||(commentForm.controls.comment.errors?.minlength && commentForm.controls.comment.dirty)">Comment must be at least 1 character but no more than 200.</li>
-                </ul>
-              </div>
-              <!-- Post Button -->
-              <button style = "float: right; position: relative;" [disabled]="!commentForm.valid || processing" type="submit" name="button" class="btn btn-sm btn-info" (click)="postComment(project._id)">Post</button>
-              <!-- Cancel Button -->
-              <button style = "float: right; position: relative;" [disabled]="processing" type="button" name="button" class="btn btn-sm btn-danger" (click)="cancelSubmission(project._id)">Cancel</button>
-            </form>
-            <!-- Form: Comment Form End -->
-  
+<!-- Post Comment Box: Start -->
+  <ul class="list-group">
+    <li class="list-group-item">
+      <!-- Post Comment Button -->
+      <button style="float: left;" type="button" name="button" class="btn btn-sm btn-danger"
+        (click)="draftComment(project._id)" [disabled]="newComment.indexOf(project._id) > -1">Post Comment</button>
+      <!-- Show Comments -->
+      <button style="float: left;" class="btn btn-sm btn-info"
+        *ngIf="enabledComments.indexOf(project._id) === -1 && project.comments.length > 0">
+        <span (click)="expand(project._id)">
+          Show Comments
+          <div class="glyphicon glyphicon-comment"></div>
+        </span>
+      </button>
+      <br />
+      <br />
+      <div *ngIf="newComment.indexOf(project._id) > -1">
+
+        <!-- Form: Comment Form Start -->
+        <form [formGroup]="commentForm">
+          <!-- Textarea Input -->
+          <textarea name="comment" rows="10" cols="30" class="form-control" formControlName="comment"></textarea>
+          <!-- Validation -->
+          <div
+            [ngClass]="{'has-success': !commentForm.controls.comment.errors && commentForm.controls.comment.dirty, 'has-error': commentForm.controls.comment.dirty && commentForm.controls.comment.errors}">
+            <ul class="help-block">
+              <li *ngIf="commentForm.controls.comment.errors?.required && commentForm.controls.comment.dirty">This field
+                is required.</li>
+              <li
+                *ngIf="(commentForm.controls.comment.errors?.maxlength && commentForm.controls.comment.dirty) ||(commentForm.controls.comment.errors?.minlength && commentForm.controls.comment.dirty)">
+                Comment must be at least 1 character but no more than 200.</li>
+            </ul>
           </div>
-  
+          <!-- Post Button -->
+          <button style="float: right; position: relative;" [disabled]="!commentForm.valid || processing" type="submit"
+            name="button" class="btn btn-sm btn-info" (click)="postComment(project._id)">Post</button>
+          <!-- Cancel Button -->
+          <button style="float: right; position: relative;" [disabled]="processing" type="button" name="button"
+            class="btn btn-sm btn-danger" (click)="cancelSubmission(project._id)">Cancel</button>
+        </form>
+        <!-- Form: Comment Form End -->
+
+      </div>
+
           <!-- Comment -->
           <div *ngIf="enabledComments.indexOf(project._id) > -1">
-            <li *ngFor="let comment of project.comments; let i = index" class="list-group-item">
-              <button style = "color: red; background-color: transparent; border: 0px;" (click)="deleteComment(i)">x</button>
-              <strong>{{ comment.commentator }}:</strong> {{ comment.comment }}
-            </li>
-          </div>
-
-            
-          <!-- Hide Comments -->
-          <li><button style = "margin-bottom: 2.5px; " *ngIf="enabledComments.indexOf(project._id) > -1" class="btn btn-sm btn-danger">
-            <span (click)="collapse(project._id)">
-              Hide Comments
-              <div class="glyphicon glyphicon-comment"></div>
-            </span></button>
-          </li>
-      </ul>
-      <!-- Post Comment Box: End -->
+        <li *ngFor="let comment of project.comments; let i = index" class="list-group-item">
+          <button style="color: red; background-color: transparent; border: 0px;" (click)="deleteComment(i)">x</button>
+          <strong>{{ comment.commentator }}:</strong> {{ comment.comment }}
+        </li>
+    </div>
 
 
-        
-
-    
-
+  <!-- Hide Comments -->
+    <li><button style="margin-bottom: 2.5px; " *ngIf="enabledComments.indexOf(project._id) > -1"
+        class="btn btn-sm btn-danger">
+        <span (click)="collapse(project._id)">
+          Hide Comments
+          <div class="glyphicon glyphicon-comment"></div>
+        </span></button>
+    </li>
+  </ul>
+  <!-- Post Comment Box: End -->
 </div>

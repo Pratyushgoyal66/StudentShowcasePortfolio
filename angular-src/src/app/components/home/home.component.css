@@ -1,28 +1,20 @@
-.right {
-    margin-left: 5px;
-    float: right;
-    background-color: #5D5C61;
-    border-color: #B0A295;
-    box-shadow: 1px 1px #B0A295;
-}
-
-.jumbotron {
-    border-radius: 1em;
-    background-color: #B0A295;
-    color: white;
-}
-
 .display-5 {
     font-family: 'Quicksand';
+    padding-top: 4%;
 }
 
 h3 {
     font-family: 'Quicksand';
     font-weight: 500;
+    color: black;
 }
 
-.right:hover {
-    background-color: #B0A295;
-    border-color: #5D5C61;
-    box-shadow: 1px 1px #5D5C61;
-}   
+.container {
+    color: black;
+    margin-top: 20%;
+    /* background-color: #FFFAFA; */
+    border-style: double;
+    border-radius: 20px;
+    border-color: #b6d7d4;
+    background-image: linear-gradient(45deg, #FFFAFA, #b6d7d4);
+}
