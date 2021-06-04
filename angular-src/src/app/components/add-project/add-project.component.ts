@@ -63,12 +63,14 @@ export class AddProjectComponent implements OnInit {
       demoId: String,
       tags: Array,
     };
+    var tags;
     project.author = rawProj.author;
     project.title = rawProj.title;
     project.body = rawProj.body;
     project.repo = rawProj.repo;
     project.demoId = rawProj.demoId;
-    project.tags = rawProj.tags.split(','); 
+    tags = rawProj.tags.toString().split(', ');
+    project.tags = tags.toString().split(','); 
 
     //addProject
     this.authService.addProject(project).subscribe(data => {

@@ -24,16 +24,18 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdvancedSearchComponent } from './components/advanced-search/advanced-search.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { EditProjectComponent } from './components/edit-project/edit-project.component';
 
 const appRoutes: Routes = [
   {path : '', component: HomeComponent},
   {path : 'register', component: RegisterComponent, canActivate: [AuthGuardLoggedIn]},
   {path : 'login', component: LoginComponent, canActivate: [AuthGuardLoggedIn]},
   {path : ':username', component: ProfileComponent, canActivate: [AuthGuardLoggedOut], runGuardsAndResolvers: 'always'},
-  {path : ':username/project/:title', component: ProjectComponent},
+  {path : ':username/project/:title', component: ProjectComponent, canActivate: [AuthGuardLoggedOut]},
   {path : ':username/addProject', component: AddProjectComponent, canActivate: [AuthGuardLoggedOut]},
-  {path : ':username/projectGallery', component: ProjectGalleryComponent},
-  {path : ':advanced/search', component: AdvancedSearchComponent},
+  {path : ':username/projectGallery', component: ProjectGalleryComponent, canActivate: [AuthGuardLoggedOut]},
+  {path : ':advanced/search', component: AdvancedSearchComponent, canActivate: [AuthGuardLoggedOut]},
+  {path : ':username/project/:title/editProject', component: EditProjectComponent},
 
 ];
 
@@ -51,6 +53,7 @@ const appRoutes: Routes = [
     AddProjectComponent,
     AddProjectComponent,
     AdvancedSearchComponent,
+    EditProjectComponent,
     
 
   ],
