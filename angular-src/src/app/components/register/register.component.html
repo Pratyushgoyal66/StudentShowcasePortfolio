@@ -1,7 +1,9 @@
-<div class="jumbotron jumbotron-fluid " style="margin-top: 70px;">
-    <div class="container">
+<div class="bigContainer">
+    <div class="smallContainer">
         <h1 class="display-5">REGISTER</h1>
+    </div>
 
+    <div class="container">
         <form [formGroup]="regForm" (submit)="onRegisterSubmit()">
             <div class="form-group">
                 <label>Name:</label>
@@ -22,7 +24,7 @@
             <div formGroupName="role">
                 <div class="form-group">
                     <h3>Role:</h3>
-                    <div class = "containerNew">
+                    <div class="containerNew">
                         <div class="d-flex justify-content-between">
                             <div class="col-xs-3">
                                 <button type="button" (click)="setRoleType(ROLE_TYPE.STUDENT)"
@@ -49,19 +51,18 @@
                                 </button>
                             </div>
                         </div>
-    
                     </div>
                 </div>
             </div>
             <div formGroupName="social">
                 <div class="form-group">
                     <h3>Social:</h3>
-                    <div class = "containerNew">
+                    <div class="containerNew">
                         <label>
                             Github:
                             <input type="text" formControlName="github">
                         </label>
-                        <label class = "linkedIn">
+                        <label class="linkedIn">
                             Linkedin:
                             <input type="text" formControlName="linkedin">
                         </label>
@@ -80,7 +81,7 @@
                 <label>Department:</label>
                 <input type="text" formControlName="department" name="department" class="form-control">
             </div>
-            <input type="submit" class="btn btn-dark submitForm" value="Submit">
+            <input type="submit" class="btn btn-light submitForm" value="Register">
         </form>
     </div>
 </div>

@@ -1,23 +1,47 @@
-<h1>Search Projects by Rating</h1>
-<ng-select [multiple]="true" [(ngModel)]="selectedTags" (change)="select()" >
-  <ng-option *ngFor="let tag of tags" [value]="tag" >{{tag}}</ng-option>
+<div class="smallContainer">
+  <h1 class="display-5">Advance Search</h1>
+</div>
+
+
+
+<ng-select [multiple]="true" [(ngModel)]="selectedTags" (change)="select()">
+  <ng-option *ngFor="let tag of tags" [value]="tag">{{tag}}</ng-option>
 </ng-select>
-<div  *ngFor="let project of displayProjects">
-  <ul style = "border: 1px solid blue;">
-    <li [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"><a class="nav-link" style="color:black" [routerLink] = "['../../', project.authorUsername, 'project', project.title ]">Title: {{project.title}}</a></li>
-    <li [routerLinkActive] = "['active']" [routerLinkActiveOptions] = "{exact:true}"><a class="nav-link" style="color:black" [routerLink] = "['../../', project.authorUsername]">Author: {{project.author}}</a></li>
+<label for = "notRated" class = "NR">NR</label>
+<input (click)="filter(0)" type = "radio" name = "rating" id = "notRated">
+<label for = "1"  class = "one">1</label>
+<input (click)="filter(2)" type = "radio" name = "rating" id = "1">
+<label for = "2" class = "two">2</label>
+<input (click)="filter(1)" type = "radio" name = "rating" id = "2">
+<label for = "3" class = "three">3</label>
+<input (click)="filter(3)" type = "radio" name = "rating" id = "3">
+<label for = "4" class = "four">4</label>
+<input (click)="filter(4)" type = "radio" name = "rating" id = "4">
+<label for = "5" class = "five">5</label>
+<input (click)="filter(5)" type = "radio" name = "rating" id = "5">
+<label for = "resetChoice" class = "RC">RC</label>
+<input (click)="reset()" type = "radio" name = "rating" id = "resetChoice" checked = "checked">
+<span class = "hideNR">Not Rated</span>
+<span class = "hide1">1 Star</span>
+<span class = "hide2">2 Star</span>
+<span class = "hide3">3 Star</span>
+<span class = "hide4">4 Star</span>
+<span class = "hide5">5 Star</span>
+<span class = "hideRC">Reset Choice</span>
+<br>
+<br>
+<br>
+<br>
+<div *ngFor="let project of displayProjects">
+  <ul style="border: 1px solid blue;">
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" style="color:black"
+        [routerLink]="['../../', project.authorUsername, 'project', project.title ]">Title: {{project.title}}</a></li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a class="nav-link" style="color:black"
+        [routerLink]="['../../', project.authorUsername]">Author: {{project.author}}</a></li>
     <li>Rating: {{project.rating}}</li>
     <li>Tags: {{project.tags}}</li>
   </ul>
   <hr>
 </div>
+
 <div>&nbsp;</div>
-<div class="btn-group btn-group-lg">
-<button class="btn btn-primary" (click)="filter(0)">Not Rated</button>
-<button class="btn btn-primary" (click)="filter(1)">1</button>
-<button class="btn btn-primary" (click)="filter(2)">2</button>
-<button class="btn btn-primary" (click)="filter(3)">3</button>
-<button class="btn btn-primary" (click)="filter(4)">4</button>
-<button class="btn btn-primary" (click)="filter(5)">5</button>
-<button class="btn btn-primary" (click)="reset()">Reset Choices</button>
-</div>

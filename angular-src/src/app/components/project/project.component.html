@@ -6,7 +6,7 @@
         <span class="star" [class.filled]="fill === 100">&#9733;</span>
       </ng-template>
     </ngb-rating>
-    <button *ngIf='checkUser()' type=button class="btn btn-primary deletebutton" (click)="onDelete()">Delete
+    <button *ngIf='checkUser()' type=button class="btn btn-light deletebutton" (click)="onDelete()">Delete
       Project</button>
     <button *ngIf='checkUser()' type=button class="btn btn-primary" (click)="onUpdate()">Edit
       Project</button>
@@ -28,7 +28,7 @@
     </li>
     <li class="list-group-item smallContainer"><strong>Repository</strong>: <a href={{project.repo}}
         style="color:black;">{{project.title}}</a></li>
-    <li class="list-group-item"><strong>Tags</strong>: {{project.tags}}</li>
+    <li class="list-group-item smallContainer"><strong>Tags</strong>: {{project.tags}}</li>
   </ul>
 
 <!-- Post Comment Box: Start -->
@@ -47,7 +47,7 @@
       </button>
       <br />
       <br />
-      <div *ngIf="newComment.indexOf(project._id) > -1">
+      <div *ngIf="newComment.indexOf(project._id) > -1" class = "textarea_comment">
 
         <!-- Form: Comment Form Start -->
         <form [formGroup]="commentForm">

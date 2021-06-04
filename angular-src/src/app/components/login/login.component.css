@@ -1,9 +1,9 @@
 .btn {
-    background-color: #72DFD4;
+    background-color: #FFFAFA;
     border-color: #72DFD4;
     box-shadow: 2px 2px #72DFD4;
     margin:0 auto;
-    color: white;
+    color: black;
     display:block;
 }
 
