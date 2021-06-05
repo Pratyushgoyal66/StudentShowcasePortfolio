@@ -16,20 +16,25 @@ h1, h3 {
     padding-left: 5rem;
 }
 
-.submitForm {
-    background-color: #72DFD4;
-    border-color: #72DFD4;
-    box-shadow: 2px 2px #72DFD4;
+.btn {
     margin:0 auto;
-    color: white;
+    color: black;
     display:block;
+    border-radius: 5px;
 }
 
-.submitForm:hover {
-    background-color: #72DFD4;
+.btn-light {
+    background-color: #FFFAFA !important;
+    border-color: #72DFD4;
+    box-shadow: 2px 2px 2px 2px #72DFD4;
+
+}
+
+.btn:hover {
+    background-color: #72DFD4 !important;
     border-color: black;
     box-shadow: 1px 1px black;
-}   
+}
 
 input, textarea {
     background-color: white;

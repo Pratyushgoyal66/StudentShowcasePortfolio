@@ -12,10 +12,9 @@ li {
 }
 
 .navbar-expand-lg .navbar-collapse {
-    position: absolute;
     right: 0%;
 }
 
 #typeahead-http {
-    width: 20%;
+    width: 25%;
 }

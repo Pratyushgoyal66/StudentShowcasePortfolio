@@ -25,7 +25,7 @@ ul {
 .page-header {
     display: inline-block;
 }
-.deletebutton {
+.deletebutton, .editbutton {
     float: right;
 }
 .star {
@@ -57,15 +57,27 @@ ul {
     float: right;
 }
 
-.btn-light {
+.deletebutton {
     background-color: #FFFAFA !important;
     border-color: #FFCCCB;
     box-shadow: 2px 2px #FFCCCB;
-
 }
 
-.btn:hover {
+.deletebutton:hover {
     background-color: #ff6c69 !important;
+    border-color: black;
+    box-shadow: 1px 1px black;
+}
+
+.editbutton {
+    background-color: #FFFAFA !important;
+    border-color: #f3db4f;
+    box-shadow: 2px 2px #f3db4f;
+    margin-right: 15px;
+}
+
+.editbutton:hover {
+    background-color: #fdec8b !important;
     border-color: black;
     box-shadow: 1px 1px black;
 }
