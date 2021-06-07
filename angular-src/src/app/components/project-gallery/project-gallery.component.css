@@ -30,7 +30,7 @@
 
 .card {
     border-color: #B6D7D4 !important;
-    border-style: dashed;
+    border-style: dashed !important;
 }
 
 .shiftBottom {

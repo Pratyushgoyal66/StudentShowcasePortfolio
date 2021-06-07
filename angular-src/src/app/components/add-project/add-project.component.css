@@ -72,3 +72,11 @@ label {
 .display-5 {
     text-align: center;
 }
+
+.boxData {
+    padding: 0% 25%;
+}
+
+.nextBoxData {
+    padding-left: 25%;
+}

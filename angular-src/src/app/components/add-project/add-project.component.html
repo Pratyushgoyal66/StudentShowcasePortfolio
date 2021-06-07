@@ -12,37 +12,43 @@
             <div formGroupName="body">
                 <div class="form-group">
                     <h3>Details:</h3>
-                    <span class="left">
-                        <label>
-                            Short Description:
-                            <textarea formControlName="shortDescription" class="form-control resize"
-                                TextMode="MultiLine" maxlength="50" required>
-                                </textarea>
-                        </label>
-                    </span>
-                    <span class="right">
-                        <label>
-                            Description:
-                            <textarea formControlName="description" class="form-control resize" TextMode="MultiLine"
-                                required>
-                                </textarea>
-                        </label>
-                    </span>
-                    <div>
-                        <span class="left">
-                            <label>
-                                Worked With:
-                                <input type="text" formControlName="workedWith" class="form-control resizeSmall"
-                                    required>
-                            </label>
-                        </span>
-                        <span class="right">
-                            <label>
-                                Worked Under:
-                                <input type="text" formControlName="workedUnder" class="form-control resizeSmall">
-                            </label>
-                        </span>
+                    <div class = "ThisIsAContainer"> 
+                       <div class = "row">
+                            <div class="col-sm col-md col-lg col-xl">
+                                <label class = "boxData">
+                                    Short Description:
+                                    <textarea formControlName="shortDescription" class="form-control resize"
+                                        TextMode="MultiLine" maxlength="50" required>
+                                        </textarea>
+                                </label>
+                            </div>
+                            <div class="col-sm col-md col-lg col-xl">
+                                <label class="boxData">
+                                    Description:
+                                    <textarea formControlName="description" class="form-control resize" TextMode="MultiLine"
+                                        required>
+                                        </textarea>
+                                </label>
+                            </div>
+                       </div>
                     </div>
+                    <div class = "ThisIsAContainer"> 
+                        <div class = "row">
+                             <div class="col-sm col-md col-lg col-xl">
+                                 <label class = "nextBoxData">
+                                    Worked With:
+                                    <input type="text" formControlName="workedWith" class="form-control resizeSmall"
+                                        required>
+                                 </label>
+                             </div>
+                             <div class="col-sm col-md col-lg col-xl">
+                                 <label class = "nextBoxData">
+                                    Worked Under:
+                                    <input type="text" formControlName="workedUnder" class="form-control resizeSmall">    
+                                 </label>
+                             </div>
+                        </div>
+                     </div>
                     <label>
                         Inspiration:
                     </label>

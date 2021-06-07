@@ -1,34 +1,31 @@
 <div class="smallContainer">
   <h1 [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-    <a style="color:black;"
-      [routerLink]="['/', username, 'projectGallery']" class = "display-5">
+    <a style="color:black;" [routerLink]="['/', username, 'projectGallery']" class="display-5">
       PROJECT GALLERY
     </a>
   </h1>
 </div>
 
-<div *ngIf = "projectGal; else noProject" class="card-group"> 
+<div *ngIf="projectGal; else noProject" class="card-group">
   <div *ngFor="let project of projectGal;">
     <div class="cardContainer">
-      <div class="card">
-        <div class="card border border-primary shadow-0 " style="height: 20rem; width: 16rem; max-width: 50ch; ">
-          <div class="card-header">Author: <strong>{{project.author}}</strong></div>
-          <div class="card-body text-dark">
-            <h5 class="card-title">
-              <i>
-                {{project.title}}
-              </i>
-            </h5>
-            <p class="card-text text-secondary">
-              {{project.body.shortDescription}}
-            </p>
-            <div class="shiftBottom">
-              <div [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-                <a mdbBtn class="waves-light" mdbWavesEffect [routerLink]="['/', username, 'project', project.title]">
-                  <mdb-icon far icon="clone" class="left"></mdb-icon>
-                  View project
-                </a>
-              </div>
+      <div class="card border border-primary shadow-0 " style="height: 20rem; width: 16rem; max-width: 50ch; ">
+        <div class="card-header">Author: <strong>{{project.author}}</strong></div>
+        <div class="card-body text-dark">
+          <h5 class="card-title">
+            <i>
+              {{project.title}}
+            </i>
+          </h5>
+          <p class="card-text text-secondary">
+            {{project.body.shortDescription}}
+          </p>
+          <div class="shiftBottom">
+            <div [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+              <a mdbBtn class="waves-light" mdbWavesEffect [routerLink]="['/', username, 'project', project.title]">
+                <mdb-icon far icon="clone" class="left"></mdb-icon>
+                View project
+              </a>
             </div>
           </div>
         </div>
